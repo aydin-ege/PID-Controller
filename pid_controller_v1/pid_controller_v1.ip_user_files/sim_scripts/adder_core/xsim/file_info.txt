@@ -1,0 +1,1 @@
+adder_core.vhd,vhdl,xil_defaultlib,../../../ip/adder_core/sim/adder_core.vhd,

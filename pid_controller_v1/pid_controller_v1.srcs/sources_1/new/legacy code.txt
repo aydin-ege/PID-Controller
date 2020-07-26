@@ -1,0 +1,22 @@
+
+--     process(i_clk)
+--     begin
+--        if rising_edge(i_clk) then
+--            if s_error_tvalid = '1' and s_error_tready = '1' and s_kp_tvalid = '1' and s_kp_tready = '1' then    --Old input was sent and processed
+--                s_kp_tvalid <= '0'; --Get ready for next transmission
+--                s_error_tvalid <= '0';
+--            end if;
+--            if s_error_tvalid = '0' and s_kp_tvalid = '0' then --We are ready for the next transmission
+--                if (not s_buf_error = i_error) and i_error_tvalid = '1' then -- input changed
+--                    s_buf_error <= i_error; -- this causes 1 clock cycle lag however s_axis_b_tdata 
+--                    s_error_tvalid <= '1';  -- has to stay constant if s_axis_b_tready is not set
+--                    s_kp_tvalid <= '1';     -- see https://zipcpu.com/formal/2018/12/28/axilite.html
+--                end if;                     
+--                if (not s_buf_kp = i_kp) and i_kp_tvalid = '1' then
+--                    s_buf_kp <= i_kp;
+--                    s_error_tvalid <= '1';
+--                    s_kp_tvalid <= '1';
+--                end if;
+--            end if;
+--        end if;
+--     end process;

@@ -1,0 +1,4 @@
+vhdl xil_defaultlib  \
+"../../../ip/accumulator_core/sim/accumulator_core.vhd" \
+
+nosort
