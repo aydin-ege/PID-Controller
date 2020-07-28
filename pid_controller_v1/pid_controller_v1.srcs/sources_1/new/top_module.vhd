@@ -61,32 +61,6 @@ architecture Behavioral of top_module is
         );
     END COMPONENT;
     
-    COMPONENT adder_core
-        PORT (
-            aclk : IN STD_LOGIC;
-            s_axis_a_tvalid : IN STD_LOGIC;
-            s_axis_a_tready : OUT STD_LOGIC;
-            s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            s_axis_b_tvalid : IN STD_LOGIC;
-            s_axis_b_tready : OUT STD_LOGIC;
-            s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            m_axis_result_tvalid : OUT STD_LOGIC;
-            m_axis_result_tready : IN STD_LOGIC;
-            m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-        );
-    END COMPONENT;
-    COMPONENT float_to_fixed
-        PORT (
-            aclk : IN STD_LOGIC;
-            s_axis_a_tvalid : IN STD_LOGIC;
-            s_axis_a_tready : OUT STD_LOGIC;
-            s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            m_axis_result_tvalid : OUT STD_LOGIC;
-            m_axis_result_tready : IN STD_LOGIC;
-            m_axis_result_tdata : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-            m_axis_result_tuser : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
-        );
-    END COMPONENT;
 
     signal s_buf_feedback, s_buf_reference : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
     signal s_error : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
@@ -98,12 +72,7 @@ architecture Behavioral of top_module is
     signal s_I_tvalid, s_I_tready : STD_LOGIC := '0';
     signal s_D_tvalid, s_D_tready : STD_LOGIC := '0';
     
-    signal s_PI_result, s_PID_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
-    signal s_PI_tvalid, s_PI_tready, s_PID_tvalid, s_PID_tready : STD_LOGIC := '0';
-    
-    signal s_output : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal s_buf_output : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-    signal s_output_tvalid, s_overflow : STD_LOGIC := '0';
+
     
 begin
     s_buf_feedback <= i_feedback when i_feedback_tvalid = '1' else s_buf_feedback; -- last valid feedback
@@ -145,7 +114,7 @@ begin
             o_I_tvalid => s_I_tvalid,
             i_I_tready => s_I_tready
         ); 
-    Derivative  : entity work.derivative(Behavioral)
+    Derivative : entity work.derivative(Behavioral)
         generic map ( g_cutoff => x"AAAAAAAA")
         port map(
             i_clk => i_clk,
@@ -159,45 +128,20 @@ begin
             i_D_tready => s_D_tready
         ); 
                  
-    PI : adder_core
-        PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_P_tvalid,
-            s_axis_a_tready => s_P_tready,
-            s_axis_a_tdata => s_P_result,
-            s_axis_b_tvalid => s_I_tvalid,
-            s_axis_b_tready => s_I_tready,
-            s_axis_b_tdata => s_I_result,
-            m_axis_result_tvalid => s_PI_tvalid,
-            m_axis_result_tready => s_PI_tready,
-            m_axis_result_tdata => s_PI_result
+    PID_sum : entity work.PID_to_output(Behavioral)
+        port map (
+            i_clk => i_clk,
+            i_P_result => s_P_result,
+            i_P_tvalid => s_P_tvalid,
+            o_P_tready => s_P_tready,
+            i_I_result => s_I_result,
+            i_I_tvalid => s_I_tvalid,
+            o_I_tready => s_I_tready,
+            i_D_result => s_D_result,
+            i_D_tvalid => s_D_tvalid,
+            o_D_tready => s_D_tready,
+            o_output => o_output,
+            o_failure => o_failure
         );
-        
-    PID : adder_core
-        PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_PI_tvalid,
-            s_axis_a_tready => s_PI_tready,
-            s_axis_a_tdata => s_PI_result,
-            s_axis_b_tvalid => s_D_tvalid,
-            s_axis_b_tready => s_D_tready,
-            s_axis_b_tdata => s_D_result,
-            m_axis_result_tvalid => s_PID_tvalid,
-            m_axis_result_tready => s_PID_tready,
-            m_axis_result_tdata => s_PID_result
-        );
-    PID_to_output : float_to_fixed
-        PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_PID_tvalid,
-            s_axis_a_tready => s_PID_tready,
-            s_axis_a_tdata => s_PID_result,
-            m_axis_result_tvalid => s_output_tvalid,
-            m_axis_result_tready => '1',
-            m_axis_result_tdata => s_output,
-            m_axis_result_tuser(0) => s_overflow
-    );   -- todo add overflow sign
-    s_buf_output <= s_output(11 downto 0) when s_output_tvalid = '1' else s_buf_output;
-    o_output <= s_buf_output;
-    o_failure <= s_overflow or s_output(12);
+
 end Behavioral;
