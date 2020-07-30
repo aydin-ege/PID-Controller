@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Wed Jul 29 00:06:57 2020
+# Process ID: 11284
+# Current directory: D:/my/Vivado/PID_Controller/PID_Controller.runs/float_to_fixed_synth_1
+# Command line: vivado.exe -log float_to_fixed.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source float_to_fixed.tcl
+# Log file: D:/my/Vivado/PID_Controller/PID_Controller.runs/float_to_fixed_synth_1/float_to_fixed.vds
+# Journal file: D:/my/Vivado/PID_Controller/PID_Controller.runs/float_to_fixed_synth_1\vivado.jou
+#-----------------------------------------------------------
+source float_to_fixed.tcl -notrace
+ERROR: [Common 17-345] A valid license was not found for feature 'Synthesis' and/or device 'xc7vx485t'. Please run the Vivado License Manager for assistance in determining
+which features and devices are licensed for your system.
+Resolution: Check the status of your licenses in the Vivado License Manager. For debug help search Xilinx Support for "Licensing FAQ". 
