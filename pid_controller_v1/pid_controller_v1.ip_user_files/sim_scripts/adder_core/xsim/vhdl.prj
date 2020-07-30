@@ -1,4 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../ip/adder_core/sim/adder_core.vhd" \
-
-nosort

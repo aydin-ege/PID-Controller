@@ -1,1 +1,0 @@
-float_to_fixed.vhd,vhdl,xil_defaultlib,../../../ip/float_to_fixed/sim/float_to_fixed.vhd,

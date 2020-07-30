@@ -1,4 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../ip/multiplier_core/sim/multiplier_core.vhd" \
-
-nosort
