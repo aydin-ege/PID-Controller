@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="float_to_fixed_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1595970413">
+<GenRun Id="float_to_fixed_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596180241">
   <File Type="RDS-PROPCONSTRS" Name="float_to_fixed_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="float_to_fixed.tcl"/>
   <File Type="RDS-RDS" Name="float_to_fixed.vds"/>
@@ -35,9 +35,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

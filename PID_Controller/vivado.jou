@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Fri Jul 31 10:23:37 2020
+# Process ID: 21444
+# Current directory: C:/Users/90534/Desktop/sum proj/PID_Controller
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent25376 C:\Users\90534\Desktop\sum proj\PID_Controller\PID_Controller.xpr
+# Log file: C:/Users/90534/Desktop/sum proj/PID_Controller/vivado.log
+# Journal file: C:/Users/90534/Desktop/sum proj/PID_Controller\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.xpr}
+reset_run fixed_to_float_synth_1
+reset_run multiplier_core_synth_1
+reset_run adder_core_synth_1
+reset_run accumulator_core_synth_1
+reset_run float_to_fixed_synth_1
+reset_run subtractor_core_synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 10
+wait_on_run synth_1
+reset_run accumulator_core_synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 10
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 10
+wait_on_run synth_1
+synth_design -rtl -name rtl_1
+reset_run synth_1
+launch_runs synth_1 -jobs 10
+wait_on_run synth_1

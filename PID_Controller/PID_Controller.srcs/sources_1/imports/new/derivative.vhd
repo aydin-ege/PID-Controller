@@ -75,7 +75,7 @@ COMPONENT multiplier_core
       );
     END COMPONENT;
       
-    COMPONENT adder_core
+    COMPONENT subtractor_core
         PORT (
             aclk : IN STD_LOGIC;
             s_axis_a_tvalid : IN STD_LOGIC;
@@ -118,13 +118,13 @@ begin
         m_axis_result_tdata => s_scaled_error  
       );
       
-      loop_subtraction: adder_core                                      --loop subtraction
+      loop_subtraction: subtractor_core                                      --loop subtraction
         PORT MAP (
             aclk => i_clk,
             s_axis_a_tvalid => s_scaled_error_tvalid,
             s_axis_a_tready => s_scaled_error_tready,
             s_axis_a_tdata => s_scaled_error,
-            s_axis_b_tvalid => s_integrated_output_tvalid,              --check what to do in order to obtain subtraction @@@@@@@@@@@@@@@@@@@@@@@@
+            s_axis_b_tvalid => s_integrated_output_tvalid,              
             s_axis_b_tready => s_integrated_output_tready,
             s_axis_b_tdata => s_integrated_output,
             m_axis_result_tvalid => s_cutoff_input_tvalid,
@@ -135,8 +135,8 @@ begin
     cutoff_mult : multiplier_core                       --multiplying with cutoff inside the feedback loop
       PORT MAP (
         aclk => i_clk,
-        s_axis_a_tvalid => s_kd_tvalid,                 --check the tvalid and tready signals  @@@@@@@@@@@@@@@@@@@@@
-        s_axis_a_tready => s_kd_tready,
+        s_axis_a_tvalid => s_cutoff_input_tvalid,                --check the tvalid and tready signals  @@@@@@@@@@@@@@@@@@@@@
+        s_axis_a_tready => s_cutoff_input_tready,
         s_axis_a_tdata => g_cutoff,
         s_axis_b_tvalid => s_cutoff_input_tvalid,
         s_axis_b_tready => s_cutoff_input_tready,
