@@ -2,14 +2,54 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Wed Jul 29 00:06:57 2020
-# Process ID: 4908
-# Current directory: D:/my/Vivado/PID_Controller/PID_Controller.runs/accumulator_core_synth_1
+# Start of session at: Fri Jul 31 10:30:47 2020
+# Process ID: 31156
+# Current directory: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/accumulator_core_synth_1
 # Command line: vivado.exe -log accumulator_core.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source accumulator_core.tcl
-# Log file: D:/my/Vivado/PID_Controller/PID_Controller.runs/accumulator_core_synth_1/accumulator_core.vds
-# Journal file: D:/my/Vivado/PID_Controller/PID_Controller.runs/accumulator_core_synth_1\vivado.jou
+# Log file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/accumulator_core_synth_1/accumulator_core.vds
+# Journal file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/accumulator_core_synth_1\vivado.jou
 #-----------------------------------------------------------
 source accumulator_core.tcl -notrace
-ERROR: [Common 17-345] A valid license was not found for feature 'Synthesis' and/or device 'xc7vx485t'. Please run the Vivado License Manager for assistance in determining
-which features and devices are licensed for your system.
-Resolution: Check the status of your licenses in the Vivado License Manager. For debug help search Xilinx Support for "Licensing FAQ". 
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:24 . Memory (MB): peak = 342.547 ; gain = 133.059
+INFO: [Synth 8-638] synthesizing module 'accumulator_core' [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/synth/accumulator_core.vhd:73]
+INFO: [Synth 8-256] done synthesizing module 'accumulator_core' (18#1) [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/synth/accumulator_core.vhd:73]
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:30 . Memory (MB): peak = 447.484 ; gain = 237.996
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:31 . Memory (MB): peak = 447.484 ; gain = 237.996
+INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.084 . Memory (MB): peak = 784.711 ; gain = 0.172
+Finished Constraint Validation : Time (s): cpu = 00:00:31 ; elapsed = 00:00:51 . Memory (MB): peak = 784.711 ; gain = 575.223
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:31 ; elapsed = 00:00:51 . Memory (MB): peak = 784.711 ; gain = 575.223
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:51 . Memory (MB): peak = 784.711 ; gain = 575.223
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:54 . Memory (MB): peak = 784.711 ; gain = 575.223
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:56 . Memory (MB): peak = 784.711 ; gain = 575.223
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:47 ; elapsed = 00:01:08 . Memory (MB): peak = 820.547 ; gain = 611.059
+Finished Timing Optimization : Time (s): cpu = 00:00:47 ; elapsed = 00:01:08 . Memory (MB): peak = 835.156 ; gain = 625.668
+Finished Technology Mapping : Time (s): cpu = 00:00:48 ; elapsed = 00:01:09 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished IO Insertion : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |DSP48E1 |     2|
+|2     |LUT1    |    16|
+|3     |LUT2    |   198|
+|4     |LUT3    |   118|
+|5     |LUT4    |   287|
+|6     |LUT5    |   183|
+|7     |LUT6    |   217|
+|8     |MUXCY   |   237|
+|9     |SRL16E  |   110|
+|10    |SRLC32E |     5|
+|11    |XORCY   |    43|
+|12    |FDE     |    47|
+|13    |FDRE    |   955|
+|14    |FDSE    |     4|
++------+--------+------+
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:49 ; elapsed = 00:01:10 . Memory (MB): peak = 849.523 ; gain = 640.035
+synth_design: Time (s): cpu = 00:00:48 ; elapsed = 00:01:06 . Memory (MB): peak = 849.523 ; gain = 586.508
