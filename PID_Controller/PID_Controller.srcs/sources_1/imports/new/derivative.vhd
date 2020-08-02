@@ -166,7 +166,9 @@ begin
      s_buf_kd <= s_buf_valid_kd when s_kd_tready = '1' else s_buf_kd; -- if multiplier is ready, send last kd
      s_kd_tvalid <= '1' when i_kd_tvalid='1' else '0' when s_sent='1' else s_kd_tvalid; -- raise whenever, keep until sent, reset after sending.
 
-     o_D_result <= s_cutoff_output;                 -- do this part work as a buffer?
+    o_D_result <= s_cutoff_output;                 
+    o_D_tvalid <= s_cutoff_output_tvalid;
+    s_cutoff_output_tready <= i_D_tready;
 
     process(i_clk)
     begin

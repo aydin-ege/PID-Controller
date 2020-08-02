@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="adder_core_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596180241">
-  <File Type="RDS-PROPCONSTRS" Name="adder_core_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="adder_core.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="adder_core_drc_synth.rpt"/>
   <File Type="RDS-RDS" Name="adder_core.vds"/>
   <File Type="RDS-UTIL" Name="adder_core_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="adder_core_utilization_synth.pb"/>
