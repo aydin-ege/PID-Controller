@@ -9,31 +9,31 @@ create_project -in_memory -part xc7vx485tffg1761-2
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.cache/wt} [current_project]
-set_property parent.project_path {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.xpr} [current_project]
+set_property webtalk.parent_dir D:/my/Vivado/PID_Controller/PID_Controller.cache/wt [current_project]
+set_property parent.project_path D:/my/Vivado/PID_Controller/PID_Controller.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part xilinx.com:vc707:part0:1.3 [current_project]
-set_property ip_output_repo {c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.cache/ip} [current_project]
+set_property ip_output_repo d:/my/Vivado/PID_Controller/PID_Controller.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.dcp}}]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp}}]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/adder_core.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/adder_core.dcp}}]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/accumulator_core.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/accumulator_core.dcp}}]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/float_to_fixed/float_to_fixed.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/float_to_fixed/float_to_fixed.dcp}}]
-add_files -quiet {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/subtractor_core.dcp}}
-set_property used_in_implementation false [get_files {{c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/subtractor_core.dcp}}]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.dcp]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/adder_core.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/adder_core.dcp]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/accumulator_core.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/accumulator_core/accumulator_core.dcp]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/float_to_fixed/float_to_fixed.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/float_to_fixed/float_to_fixed.dcp]
+add_files -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/subtractor_core.dcp
+set_property used_in_implementation false [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/subtractor_core.dcp]
 read_vhdl -library xil_defaultlib {
-  {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/proportional.vhd}
-  {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/PID_to_output.vhd}
-  {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/integral.vhd}
-  {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/derivative.vhd}
-  {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/top_module.vhd}
+  D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/imports/new/proportional.vhd
+  D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/imports/new/PID_to_output.vhd
+  D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/imports/new/integral.vhd
+  D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/imports/new/derivative.vhd
+  D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/imports/new/top_module.vhd
 }
 foreach dcp [get_files -quiet -all *.dcp] {
   set_property used_in_implementation false $dcp

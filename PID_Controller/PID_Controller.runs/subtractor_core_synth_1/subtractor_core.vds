@@ -2,35 +2,35 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Fri Jul 31 10:24:05 2020
-# Process ID: 25508
-# Current directory: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/subtractor_core_synth_1
+# Start of session at: Sun Aug 02 12:08:49 2020
+# Process ID: 8176
+# Current directory: D:/my/Vivado/PID_Controller/PID_Controller.runs/subtractor_core_synth_1
 # Command line: vivado.exe -log subtractor_core.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source subtractor_core.tcl
-# Log file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/subtractor_core_synth_1/subtractor_core.vds
-# Journal file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/subtractor_core_synth_1\vivado.jou
+# Log file: D:/my/Vivado/PID_Controller/PID_Controller.runs/subtractor_core_synth_1/subtractor_core.vds
+# Journal file: D:/my/Vivado/PID_Controller/PID_Controller.runs/subtractor_core_synth_1\vivado.jou
 #-----------------------------------------------------------
 source subtractor_core.tcl -notrace
-Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:29 . Memory (MB): peak = 342.441 ; gain = 132.113
-INFO: [Synth 8-638] synthesizing module 'subtractor_core' [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/synth/subtractor_core.vhd:74]
-INFO: [Synth 8-256] done synthesizing module 'subtractor_core' (19#1) [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/synth/subtractor_core.vhd:74]
-Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:34 . Memory (MB): peak = 424.582 ; gain = 214.254
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:34 . Memory (MB): peak = 424.582 ; gain = 214.254
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:27 . Memory (MB): peak = 306.934 ; gain = 93.945
+INFO: [Synth 8-638] synthesizing module 'subtractor_core' [d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/synth/subtractor_core.vhd:74]
+INFO: [Synth 8-256] done synthesizing module 'subtractor_core' (19#1) [d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/subtractor_core/synth/subtractor_core.vhd:74]
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:32 . Memory (MB): peak = 390.211 ; gain = 177.223
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:32 . Memory (MB): peak = 390.211 ; gain = 177.223
 INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 759.988 ; gain = 0.004
-Finished Constraint Validation : Time (s): cpu = 00:00:34 ; elapsed = 00:00:58 . Memory (MB): peak = 759.988 ; gain = 549.660
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:34 ; elapsed = 00:00:58 . Memory (MB): peak = 759.988 ; gain = 549.660
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:58 . Memory (MB): peak = 759.988 ; gain = 549.660
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:36 ; elapsed = 00:01:00 . Memory (MB): peak = 759.988 ; gain = 549.660
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:01:01 . Memory (MB): peak = 759.988 ; gain = 549.660
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:51 ; elapsed = 00:01:16 . Memory (MB): peak = 814.391 ; gain = 604.063
-Finished Timing Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:01:16 . Memory (MB): peak = 825.035 ; gain = 614.707
-Finished Technology Mapping : Time (s): cpu = 00:00:52 ; elapsed = 00:01:16 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 724.746 ; gain = 0.066
+Finished Constraint Validation : Time (s): cpu = 00:00:27 ; elapsed = 00:00:53 . Memory (MB): peak = 724.746 ; gain = 511.758
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:27 ; elapsed = 00:00:53 . Memory (MB): peak = 724.746 ; gain = 511.758
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:53 . Memory (MB): peak = 724.746 ; gain = 511.758
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:54 . Memory (MB): peak = 724.746 ; gain = 511.758
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:56 . Memory (MB): peak = 724.746 ; gain = 511.758
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:01:08 . Memory (MB): peak = 779.379 ; gain = 566.391
+Finished Timing Optimization : Time (s): cpu = 00:00:42 ; elapsed = 00:01:08 . Memory (MB): peak = 790.035 ; gain = 577.047
+Finished Technology Mapping : Time (s): cpu = 00:00:42 ; elapsed = 00:01:08 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
 
 Report Cell Usage: 
 +------+----------+------+
@@ -51,5 +51,5 @@ Report Cell Usage:
 |13    |FDE       |    12|
 |14    |FDRE      |   438|
 +------+----------+------+
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:01:17 . Memory (MB): peak = 837.680 ; gain = 627.352
-synth_design: Time (s): cpu = 00:00:50 ; elapsed = 00:01:10 . Memory (MB): peak = 839.164 ; gain = 576.191
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:01:09 . Memory (MB): peak = 802.625 ; gain = 589.637
+synth_design: Time (s): cpu = 00:00:43 ; elapsed = 00:01:02 . Memory (MB): peak = 804.043 ; gain = 577.938

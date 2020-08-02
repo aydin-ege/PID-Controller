@@ -1,8 +1,8 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-| Date         : Fri Jul 31 10:25:25 2020
-| Host         : Erdem running 64-bit major release  (build 9200)
+| Date         : Sun Aug 02 12:06:37 2020
+| Host         : Ege-PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file multiplier_core_utilization_synth.rpt -pb multiplier_core_utilization_synth.pb
 | Design       : multiplier_core
 | Device       : 7vx485tffg1761-2
