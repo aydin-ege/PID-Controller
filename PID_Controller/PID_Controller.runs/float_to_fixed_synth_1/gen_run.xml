@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="float_to_fixed_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596180241">
-  <File Type="RDS-PROPCONSTRS" Name="float_to_fixed_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="float_to_fixed.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="float_to_fixed_drc_synth.rpt"/>
   <File Type="RDS-RDS" Name="float_to_fixed.vds"/>
   <File Type="RDS-UTIL" Name="float_to_fixed_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="float_to_fixed_utilization_synth.pb"/>
