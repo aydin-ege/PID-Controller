@@ -2,35 +2,35 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Fri Jul 31 10:24:05 2020
-# Process ID: 2052
-# Current directory: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/adder_core_synth_1
+# Start of session at: Sun Aug 02 12:04:52 2020
+# Process ID: 2528
+# Current directory: D:/my/Vivado/PID_Controller/PID_Controller.runs/adder_core_synth_1
 # Command line: vivado.exe -log adder_core.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source adder_core.tcl
-# Log file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/adder_core_synth_1/adder_core.vds
-# Journal file: C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.runs/adder_core_synth_1\vivado.jou
+# Log file: D:/my/Vivado/PID_Controller/PID_Controller.runs/adder_core_synth_1/adder_core.vds
+# Journal file: D:/my/Vivado/PID_Controller/PID_Controller.runs/adder_core_synth_1\vivado.jou
 #-----------------------------------------------------------
 source adder_core.tcl -notrace
-Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:26 . Memory (MB): peak = 342.090 ; gain = 132.094
-INFO: [Synth 8-638] synthesizing module 'adder_core' [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/synth/adder_core.vhd:74]
-INFO: [Synth 8-256] done synthesizing module 'adder_core' (19#1) [c:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/synth/adder_core.vhd:74]
-Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:31 . Memory (MB): peak = 425.051 ; gain = 215.055
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:32 . Memory (MB): peak = 425.051 ; gain = 215.055
+Starting RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:34 . Memory (MB): peak = 306.059 ; gain = 93.016
+INFO: [Synth 8-638] synthesizing module 'adder_core' [d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/synth/adder_core.vhd:74]
+INFO: [Synth 8-256] done synthesizing module 'adder_core' (19#1) [d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/adder_core/synth/adder_core.vhd:74]
+Finished RTL Elaboration : Time (s): cpu = 00:00:17 ; elapsed = 00:00:41 . Memory (MB): peak = 388.844 ; gain = 175.801
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:41 . Memory (MB): peak = 388.844 ; gain = 175.801
 INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 759.555 ; gain = 0.000
-Finished Constraint Validation : Time (s): cpu = 00:00:34 ; elapsed = 00:00:56 . Memory (MB): peak = 759.555 ; gain = 549.559
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:34 ; elapsed = 00:00:56 . Memory (MB): peak = 759.555 ; gain = 549.559
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:34 ; elapsed = 00:00:56 . Memory (MB): peak = 759.555 ; gain = 549.559
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:35 ; elapsed = 00:00:58 . Memory (MB): peak = 759.555 ; gain = 549.559
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:01:00 . Memory (MB): peak = 759.555 ; gain = 549.559
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:51 ; elapsed = 00:01:14 . Memory (MB): peak = 813.949 ; gain = 603.953
-Finished Timing Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:01:14 . Memory (MB): peak = 825.555 ; gain = 615.559
-Finished Technology Mapping : Time (s): cpu = 00:00:51 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.046 . Memory (MB): peak = 723.938 ; gain = 0.055
+Finished Constraint Validation : Time (s): cpu = 00:00:42 ; elapsed = 00:01:14 . Memory (MB): peak = 723.938 ; gain = 510.895
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:42 ; elapsed = 00:01:14 . Memory (MB): peak = 723.938 ; gain = 510.895
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:01:14 . Memory (MB): peak = 723.938 ; gain = 510.895
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:45 ; elapsed = 00:01:18 . Memory (MB): peak = 723.938 ; gain = 510.895
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:47 ; elapsed = 00:01:20 . Memory (MB): peak = 723.938 ; gain = 510.895
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:06 ; elapsed = 00:01:40 . Memory (MB): peak = 778.531 ; gain = 565.488
+Finished Timing Optimization : Time (s): cpu = 00:01:06 ; elapsed = 00:01:40 . Memory (MB): peak = 789.164 ; gain = 576.121
+Finished Technology Mapping : Time (s): cpu = 00:01:07 ; elapsed = 00:01:40 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished IO Insertion : Time (s): cpu = 00:01:07 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:07 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:08 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
 
 Report Cell Usage: 
 +------+----------+------+
@@ -51,5 +51,5 @@ Report Cell Usage:
 |13    |FDE       |    12|
 |14    |FDRE      |   438|
 +------+----------+------+
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:01:15 . Memory (MB): peak = 837.234 ; gain = 627.238
-synth_design: Time (s): cpu = 00:00:49 ; elapsed = 00:01:09 . Memory (MB): peak = 838.332 ; gain = 575.859
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:41 . Memory (MB): peak = 801.801 ; gain = 588.758
+synth_design: Time (s): cpu = 00:01:06 ; elapsed = 00:01:33 . Memory (MB): peak = 803.195 ; gain = 576.922
