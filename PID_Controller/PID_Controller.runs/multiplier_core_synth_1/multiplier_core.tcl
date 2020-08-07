@@ -4,8 +4,6 @@
 
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config -msgmgr_mode ooc_run
 create_project -in_memory -part xc7vx485tffg1761-2
 
@@ -16,12 +14,12 @@ set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity i
 set_property webtalk.parent_dir D:/my/Vivado/PID_Controller/PID_Controller.cache/wt [current_project]
 set_property parent.project_path D:/my/Vivado/PID_Controller/PID_Controller.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
-set_property target_language Verilog [current_project]
+set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:vc707:part0:1.3 [current_project]
 set_property ip_output_repo d:/my/Vivado/PID_Controller/PID_Controller.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_ip -quiet d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci
-set_property is_locked true [get_files d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci]
+read_ip -quiet D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci
+set_property is_locked true [get_files D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci]
 
 foreach dcp [get_files -quiet -all *.dcp] {
   set_property used_in_implementation false $dcp
@@ -64,32 +62,32 @@ write_checkpoint -force -noxdef multiplier_core.dcp
 catch { report_utilization -file multiplier_core_utilization_synth.rpt -pb multiplier_core_utilization_synth.pb }
 
 if { [catch {
-  file copy -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core.dcp d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp
+  file copy -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core.dcp D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  write_verilog -force -mode synth_stub d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v
+  write_verilog -force -mode synth_stub D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl
+  write_vhdl -force -mode synth_stub D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.v
+  write_verilog -force -mode funcsim D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.vhdl
+  write_vhdl -force -mode funcsim D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -99,32 +97,32 @@ if { [catch {
 
 
 if { [catch {
-  file copy -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core.dcp d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp
+  file copy -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core.dcp D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_stub.v d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v
+  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_stub.v D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_stub.vhdl d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl
+  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_stub.vhdl D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_sim_netlist.v d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.v
+  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_sim_netlist.v D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_sim_netlist.vhdl d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.vhdl
+  file rename -force D:/my/Vivado/PID_Controller/PID_Controller.runs/multiplier_core_synth_1/multiplier_core_sim_netlist.vhdl D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -133,12 +131,12 @@ if { [catch {
 
 if {[file isdir D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core]} {
   catch { 
-    file copy -force d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core
+    file copy -force D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.v D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core
   }
 }
 
 if {[file isdir D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core]} {
   catch { 
-    file copy -force d:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core
+    file copy -force D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl D:/my/Vivado/PID_Controller/PID_Controller.ip_user_files/ip/multiplier_core
   }
 }

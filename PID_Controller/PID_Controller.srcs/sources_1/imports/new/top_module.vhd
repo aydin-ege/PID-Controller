@@ -59,11 +59,11 @@ architecture Behavioral of top_module is
 begin
     s_buf_feedback <= i_feedback when i_feedback_tvalid = '1' else s_buf_feedback; -- last valid feedback
     s_buf_reference <= i_reference when i_reference_tvalid = '1' else s_buf_reference; -- last valid reference
-    s_buf_kp <= i_kp when i_kp_tvalid = '1' else i_kp;
-    s_buf_ki <= i_ki when i_ki_tvalid = '1' else i_ki;
-    s_buf_kd <= i_kd when i_kd_tvalid = '1' else i_kd;
+    s_buf_kp <= i_kp when i_kp_tvalid = '1' else s_buf_kp;
+    s_buf_ki <= i_ki when i_ki_tvalid = '1' else s_buf_ki;
+    s_buf_kd <= i_kd when i_kd_tvalid = '1' else s_buf_kd;
     
-    s_error <= std_logic_vector(signed(x"0" & i_reference) - signed(x"0" & i_feedback)) & x"0000" & "00"; 
+    s_error <= std_logic_vector(signed("00" & s_buf_reference) - signed("00" & s_buf_feedback)) & "00" & x"0000"; 
         
     Proportional : entity work.proportional(Behavioral)
         port map(
@@ -74,19 +74,21 @@ begin
         );
         
     Integral : entity work.integral(Behavioral)
-        generic map ( g_max_accumulator => to_sfixed(1000, 13, -18)) --Change these later
+        generic map ( 
+            g_max_accumulator => to_sfixed(1000, 13, -18),
+            g_min_accumulator => to_sfixed(-1000, 13, -18)
+        )
         port map(
             i_clk => i_clk,
             i_adc_clk => i_adc_clk,
             i_error => s_error,
-            i_ki => i_ki,
+            i_ki => s_buf_ki,
             o_I_result => s_I_result
         ); 
         
                  
     PID_sum : entity work.PID_to_output(Behavioral)
         port map (
-            i_clk => i_clk,
             i_P_result => s_P_result,
             i_I_result => s_I_result,
             i_D_result => s_D_result,

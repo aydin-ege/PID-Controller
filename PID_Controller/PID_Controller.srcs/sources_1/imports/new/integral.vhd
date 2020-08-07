@@ -33,7 +33,10 @@ use ieee.fixed_pkg.all;
 --use UNISIM.VComponents.all;
 
 entity integral is
-    Generic ( g_max_accumulator : sfixed (13 downto -18) ); --only positive leave last bit alone
+    Generic ( 
+        g_max_accumulator : sfixed (13 downto -18);
+        g_min_accumulator : sfixed (13 downto -18)
+    );
     Port ( 
         i_clk : in STD_LOGIC;
         i_adc_clk : in STD_LOGIC;
@@ -55,7 +58,7 @@ architecture Behavioral of integral is
     
     signal s_buf_I_result, s_before_output  : sfixed(13 downto -18) := (others => '0');
     signal s_scaled_error, s_buf_scaled_error, s_until_max : sfixed(13 downto -18) := (others => '0');
-    signal s_scaled_error_vector : STD_LOGIC_VECTOR(63 downto 0);
+    signal s_scaled_error_vector : STD_LOGIC_VECTOR(63 downto 0) := (others => '0');
 begin    
     
     ki_mult : multiplier_core
@@ -65,22 +68,22 @@ begin
             B => i_error,
             P => s_scaled_error_vector
         );
-    s_scaled_error <= to_sfixed((s_scaled_error_vector), s_scaled_error);  
+    s_scaled_error <= to_sfixed(s_scaled_error_vector, s_scaled_error);  
     s_before_output <= resize(abs(s_scaled_error + s_buf_I_result), s_before_output);  
     
     process(i_adc_clk)
     begin
         if rising_edge(i_adc_clk) then
-            if s_buf_I_result + s_scaled_error < g_max_accumulator and s_buf_I_result + s_scaled_error > - g_max_accumulator then
-                s_buf_I_result <= s_buf_I_result + s_scaled_error;
+            if s_buf_I_result + s_scaled_error < g_max_accumulator and s_buf_I_result + s_scaled_error > g_min_accumulator then
+                s_buf_I_result <= resize(s_buf_I_result + s_scaled_error, s_buf_I_result);
             else
                 if s_buf_I_result + s_scaled_error < 0 then
-                    s_buf_I_result <= - g_max_accumulator;
+                    s_buf_I_result <= g_min_accumulator;
                 else
                     s_buf_I_result <= g_max_accumulator; 
                 end if;
             end if;
         end if;
     end process;
-    
+    o_I_result <= to_slv(s_buf_I_result);
 end Behavioral;

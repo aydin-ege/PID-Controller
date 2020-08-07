@@ -32,7 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity PID_to_output is
-    Port (  i_clk : in STD_LOGIC;
+    Port ( 
             i_P_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
             i_I_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
             i_D_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -42,10 +42,10 @@ entity PID_to_output is
 end PID_to_output;
 
 architecture Behavioral of PID_to_output is
-    signal s_output: signed(31 downto 0);
+    signal s_output: signed(31 downto 0) := (others => '0');
 begin
     s_output <= signed(i_P_result) + signed(i_I_result) + signed(i_D_result);
     o_output <= std_logic_vector(s_output(29 downto 18));
-    o_failure <= s_output(30); -- only one overflow here tie with other module fails
+    o_failure <= s_output(30) or s_output(31); -- only one overflow here tie with other module fails
     
 end Behavioral;

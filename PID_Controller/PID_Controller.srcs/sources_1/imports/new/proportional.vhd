@@ -48,15 +48,14 @@ architecture Behavioral of proportional is
         );
     END COMPONENT;
     
-    signal s_buf_kp, s_buf_error : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
     signal s_P_result : STD_LOGIC_VECTOR (63 downto 0)  := (others => '0');
 begin
 
     Proportional : multiplier_core
         PORT MAP (
             CLK => i_clk,
-            A => s_buf_kp,
-            B => s_buf_error,
+            A => i_kp,
+            B => i_error,
             P => s_P_result
         );
 
