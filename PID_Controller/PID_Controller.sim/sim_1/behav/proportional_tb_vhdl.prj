@@ -1,7 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  "../../../PID_Controller.srcs/sources_1/ip/multiplier_core/sim/multiplier_core.vhd"
-vhdl xil_defaultlib  "../../../PID_Controller.srcs/sources_1/imports/new/proportional.vhd"
-vhdl xil_defaultlib  "../../../PID_Controller.srcs/sim_1/new/Proportional_tb.vhd"
-
-# Do not sort compile order
-nosort
