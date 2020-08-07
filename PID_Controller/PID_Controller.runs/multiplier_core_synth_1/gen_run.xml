@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="multiplier_core_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596359076">
-  <File Type="PA-TCL" Name="multiplier_core.tcl"/>
+<GenRun Id="multiplier_core_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596820922">
   <File Type="RDS-PROPCONSTRS" Name="multiplier_core_drc_synth.rpt"/>
+  <File Type="PA-TCL" Name="multiplier_core.tcl"/>
   <File Type="RDS-RDS" Name="multiplier_core.vds"/>
   <File Type="RDS-UTIL" Name="multiplier_core_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="multiplier_core_utilization_synth.pb"/>

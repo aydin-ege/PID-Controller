@@ -14,7 +14,7 @@
 -- 
 -- Revision:
 -- Revision 0.01 - File Created
--- Additional Comments:
+-- Additional Comments: 53 cycles (some ops are in parallel so not exactly 53)
 -- 
 ----------------------------------------------------------------------------------
 
@@ -105,20 +105,20 @@ COMPONENT multiplier_core
 begin
 
     kd_mult : multiplier_core                       --the inputted error is multiplied by Kd
-      PORT MAP (
-        aclk => i_clk,
-        s_axis_a_tvalid => s_kd_tvalid,
-        s_axis_a_tready => s_kd_tready,
-        s_axis_a_tdata => s_buf_kd,
-        s_axis_b_tvalid => s_error_tvalid,
-        s_axis_b_tready => s_error_tready,
-        s_axis_b_tdata => s_buf_error,
-        m_axis_result_tvalid => s_scaled_error_tvalid, 
-        m_axis_result_tready => s_scaled_error_tready, 
-        m_axis_result_tdata => s_scaled_error  
-      );
-      
-      loop_subtraction: subtractor_core                                      --loop subtraction
+        PORT MAP (
+            aclk => i_clk,
+            s_axis_a_tvalid => s_kd_tvalid,
+            s_axis_a_tready => s_kd_tready,
+            s_axis_a_tdata => s_buf_kd,
+            s_axis_b_tvalid => s_error_tvalid,
+            s_axis_b_tready => s_error_tready,
+            s_axis_b_tdata => s_buf_error,
+            m_axis_result_tvalid => s_scaled_error_tvalid, 
+            m_axis_result_tready => s_scaled_error_tready, 
+            m_axis_result_tdata => s_scaled_error  
+        );
+
+    loop_subtraction: subtractor_core                                      --loop subtraction
         PORT MAP (
             aclk => i_clk,
             s_axis_a_tvalid => s_scaled_error_tvalid,
@@ -133,38 +133,38 @@ begin
         );
 
     cutoff_mult : multiplier_core                       --multiplying with cutoff inside the feedback loop
-      PORT MAP (
-        aclk => i_clk,
-        s_axis_a_tvalid => s_cutoff_input_tvalid,                --check the tvalid and tready signals  @@@@@@@@@@@@@@@@@@@@@
-        s_axis_a_tready => s_cutoff_input_tready,
-        s_axis_a_tdata => g_cutoff,
-        s_axis_b_tvalid => s_cutoff_input_tvalid,
-        s_axis_b_tready => s_cutoff_input_tready,
-        s_axis_b_tdata => s_cutoff_input,
-        m_axis_result_tvalid => s_cutoff_output_tvalid,
-        m_axis_result_tready => s_cutoff_output_tready,
-        m_axis_result_tdata => s_cutoff_output
-      );
-      
-    feedback_integral_path : accumulator_core       --integral accumulator for the feedback loop
-      PORT MAP (
-        aclk => i_adc_clk,
-        s_axis_a_tvalid => s_cutoff_output_tvalid,
-        s_axis_a_tready => s_cutoff_output_tready,
-        s_axis_a_tdata => s_cutoff_output,
-        s_axis_a_tlast => '0',  -- Change: Use to reset
-        m_axis_result_tvalid => s_integrated_output_tvalid,
-        m_axis_result_tready => s_integrated_output_tready,
-        m_axis_result_tdata => s_integrated_output
-      );
+        PORT MAP (
+            aclk => i_clk,
+            s_axis_a_tvalid => s_cutoff_input_tvalid,                --check the tvalid and tready signals  @@@@@@@@@@@@@@@@@@@@@
+            s_axis_a_tready => s_cutoff_input_tready,
+            s_axis_a_tdata => g_cutoff,
+            s_axis_b_tvalid => s_cutoff_input_tvalid,
+            s_axis_b_tready => s_cutoff_input_tready,
+            s_axis_b_tdata => s_cutoff_input,
+            m_axis_result_tvalid => s_cutoff_output_tvalid,
+            m_axis_result_tready => s_cutoff_output_tready,
+            m_axis_result_tdata => s_cutoff_output
+        );
 
-     s_buf_valid_error <= i_error when i_error_tvalid = '1' else s_buf_valid_error; -- last error that is valid
-     s_buf_error <= s_buf_valid_error when s_error_tready = '1' else s_buf_error; -- if multiplier is ready, send last error
-     s_error_tvalid <= '1' when i_error_tvalid='1' else '0' when s_sent='1' else s_error_tvalid; -- raise whenever, keep until sent, reset after sending.
-     
-     s_buf_valid_kd <= i_kd when i_kd_tvalid = '1' else s_buf_valid_kd; -- last kd that is valid
-     s_buf_kd <= s_buf_valid_kd when s_kd_tready = '1' else s_buf_kd; -- if multiplier is ready, send last kd
-     s_kd_tvalid <= '1' when i_kd_tvalid='1' else '0' when s_sent='1' else s_kd_tvalid; -- raise whenever, keep until sent, reset after sending.
+    feedback_integral_path : accumulator_core       --integral accumulator for the feedback loop
+        PORT MAP (
+            aclk => i_adc_clk,
+            s_axis_a_tvalid => s_cutoff_output_tvalid,
+            s_axis_a_tready => s_cutoff_output_tready,
+            s_axis_a_tdata => s_cutoff_output,
+            s_axis_a_tlast => '0',  -- Change: Use to reset
+            m_axis_result_tvalid => s_integrated_output_tvalid,
+            m_axis_result_tready => s_integrated_output_tready,
+            m_axis_result_tdata => s_integrated_output
+        );
+    
+    s_buf_valid_error <= i_error when i_error_tvalid = '1' else s_buf_valid_error; -- last error that is valid
+    s_buf_error <= s_buf_valid_error when s_error_tready = '1' else s_buf_error; -- if multiplier is ready, send last error
+    s_error_tvalid <= '1' when i_error_tvalid='1' else '0' when s_sent='1' else s_error_tvalid; -- raise whenever, keep until sent, reset after sending.
+    
+    s_buf_valid_kd <= i_kd when i_kd_tvalid = '1' else s_buf_valid_kd; -- last kd that is valid
+    s_buf_kd <= s_buf_valid_kd when s_kd_tready = '1' else s_buf_kd; -- if multiplier is ready, send last kd
+    s_kd_tvalid <= '1' when i_kd_tvalid='1' else '0' when s_sent='1' else s_kd_tvalid; -- raise whenever, keep until sent, reset after sending.
 
     o_D_result <= s_cutoff_output;                 
     o_D_tvalid <= s_cutoff_output_tvalid;

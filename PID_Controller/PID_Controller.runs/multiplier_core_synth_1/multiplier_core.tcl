@@ -14,7 +14,7 @@ set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity i
 set_property webtalk.parent_dir D:/my/Vivado/PID_Controller/PID_Controller.cache/wt [current_project]
 set_property parent.project_path D:/my/Vivado/PID_Controller/PID_Controller.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
-set_property target_language Verilog [current_project]
+set_property target_language VHDL [current_project]
 set_property board_part xilinx.com:vc707:part0:1.3 [current_project]
 set_property ip_output_repo d:/my/Vivado/PID_Controller/PID_Controller.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]

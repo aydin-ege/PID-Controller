@@ -25,7 +25,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-
+use IEEE.fixed_pkg.ALL;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
@@ -51,95 +51,47 @@ entity top_module is
 end top_module;
 
 architecture Behavioral of top_module is 
-    COMPONENT fixed_to_float
-        PORT (
-            aclk : IN STD_LOGIC;
-            s_axis_a_tvalid : IN STD_LOGIC;
-            s_axis_a_tdata : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-            m_axis_result_tvalid : OUT STD_LOGIC;
-            m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-        );
-    END COMPONENT;
-    
-
     signal s_buf_feedback, s_buf_reference : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-    signal s_error : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal s_error_float : STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '0');
-    signal s_error_tvalid, s_error_float_tvalid : STD_LOGIC := '0';
-    
+    signal s_error : STD_LOGIC_VECTOR(31 downto 0) := (others => '0'); 
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
-    signal s_P_tvalid, s_P_tready : STD_LOGIC := '0';
-    signal s_I_tvalid, s_I_tready : STD_LOGIC := '0';
-    signal s_D_tvalid, s_D_tready : STD_LOGIC := '0';
-    
+    signal s_buf_kp, s_buf_ki, s_buf_kd : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
 
-    
 begin
     s_buf_feedback <= i_feedback when i_feedback_tvalid = '1' else s_buf_feedback; -- last valid feedback
     s_buf_reference <= i_reference when i_reference_tvalid = '1' else s_buf_reference; -- last valid reference
+    s_buf_kp <= i_kp when i_kp_tvalid = '1' else s_buf_kp;
+    s_buf_ki <= i_ki when i_ki_tvalid = '1' else s_buf_ki;
+    s_buf_kd <= i_kd when i_kd_tvalid = '1' else s_buf_kd;
     
-    s_error <= std_logic_vector(signed(x"0" & i_reference) - signed(x"0" & i_feedback)); --Assuming unsigned feedback from ADC and similarly unsigned reference signal
-    s_error_tvalid <= i_feedback_tvalid and i_reference_tvalid; 
-    
-    error_to_float : fixed_to_float
-        port map(
-            aclk => i_clk,
-            s_axis_a_tvalid => s_error_tvalid,
-            s_axis_a_tdata => s_error,
-            m_axis_result_tvalid => s_error_float_tvalid,
-            m_axis_result_tdata => s_error_float
-        );
-    
+    s_error <= std_logic_vector(signed("00" & s_buf_reference) - signed("00" & s_buf_feedback)) & "00" & x"0000"; 
+        
     Proportional : entity work.proportional(Behavioral)
         port map(
             i_clk => i_clk,
-            i_error => s_error_float,
-            i_error_tvalid => s_error_float_tvalid,
-            i_kp => i_kp,
-            i_kp_tvalid => i_kp_tvalid,
-            o_P_result => s_P_result,
-            o_P_tvalid => s_P_tvalid,
-            i_P_tready => s_P_tready
+            i_error => s_error,
+            i_kp => s_buf_kp,
+            o_P_result => s_P_result
         );
+        
     Integral : entity work.integral(Behavioral)
-        generic map ( g_max_accumulator => b"000" & x"AAAAAAA") --Change these later
+        generic map ( 
+            g_max_accumulator => to_sfixed(1000, 13, -18),
+            g_min_accumulator => to_sfixed(-1000, 13, -18)
+        )
         port map(
             i_clk => i_clk,
             i_adc_clk => i_adc_clk,
-            i_error => s_error_float,
-            i_error_tvalid => s_error_float_tvalid,
-            i_ki => i_ki,
-            i_ki_tvalid => i_ki_tvalid,
-            o_I_result => s_I_result,
-            o_I_tvalid => s_I_tvalid,
-            i_I_tready => s_I_tready
+            i_error => s_error,
+            i_ki => s_buf_ki,
+            o_I_result => s_I_result
         ); 
-    Derivative : entity work.derivative(Behavioral)
-        generic map ( g_cutoff => x"AAAAAAAA")
-        port map(
-            i_clk => i_clk,
-            i_adc_clk => i_adc_clk,
-            i_error => s_error_float,
-            i_error_tvalid => s_error_float_tvalid,
-            i_kd => i_kd,
-            i_kd_tvalid => i_kd_tvalid,
-            o_D_result => s_D_result,
-            o_D_tvalid => s_D_tvalid,
-            i_D_tready => s_D_tready
-        ); 
+        
                  
     PID_sum : entity work.PID_to_output(Behavioral)
         port map (
-            i_clk => i_clk,
             i_P_result => s_P_result,
-            i_P_tvalid => s_P_tvalid,
-            o_P_tready => s_P_tready,
             i_I_result => s_I_result,
-            i_I_tvalid => s_I_tvalid,
-            o_I_tready => s_I_tready,
             i_D_result => s_D_result,
-            i_D_tvalid => s_D_tvalid,
-            o_D_tready => s_D_tready,
             o_output => o_output,
             o_failure => o_failure
         );
