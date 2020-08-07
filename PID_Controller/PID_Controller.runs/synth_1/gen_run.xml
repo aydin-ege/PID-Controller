@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1596359895">
-  <File Type="RDS-PROPCONSTRS" Name="top_module_drc_synth.rpt"/>
   <File Type="PA-TCL" Name="top_module.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="top_module_drc_synth.rpt"/>
   <File Type="RDS-RDS" Name="top_module.vds"/>
   <File Type="RDS-UTIL" Name="top_module_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="top_module_utilization_synth.pb"/>
@@ -66,10 +66,10 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2016"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="float_to_fixed"/>
   <BlockFileSet Type="BlockSrcs" Name="fixed_to_float"/>
+  <BlockFileSet Type="BlockSrcs" Name="float_to_fixed"/>
   <BlockFileSet Type="BlockSrcs" Name="multiplier_core"/>
-  <BlockFileSet Type="BlockSrcs" Name="accumulator_core"/>
   <BlockFileSet Type="BlockSrcs" Name="adder_core"/>
+  <BlockFileSet Type="BlockSrcs" Name="accumulator_core"/>
   <BlockFileSet Type="BlockSrcs" Name="subtractor_core"/>
 </GenRun>

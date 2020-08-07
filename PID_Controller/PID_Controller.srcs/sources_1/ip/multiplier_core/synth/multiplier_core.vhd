@@ -46,255 +46,101 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:ip:floating_point:7.1
--- IP Revision: 3
+-- IP VLNV: xilinx.com:ip:mult_gen:12.0
+-- IP Revision: 12
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY floating_point_v7_1_3;
-USE floating_point_v7_1_3.floating_point_v7_1_3;
+LIBRARY mult_gen_v12_0_12;
+USE mult_gen_v12_0_12.mult_gen_v12_0_12;
 
 ENTITY multiplier_core IS
   PORT (
-    aclk : IN STD_LOGIC;
-    s_axis_a_tvalid : IN STD_LOGIC;
-    s_axis_a_tready : OUT STD_LOGIC;
-    s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    s_axis_b_tvalid : IN STD_LOGIC;
-    s_axis_b_tready : OUT STD_LOGIC;
-    s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m_axis_result_tvalid : OUT STD_LOGIC;
-    m_axis_result_tready : IN STD_LOGIC;
-    m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+    CLK : IN STD_LOGIC;
+    A : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    P : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
   );
 END multiplier_core;
 
 ARCHITECTURE multiplier_core_arch OF multiplier_core IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF multiplier_core_arch: ARCHITECTURE IS "yes";
-  COMPONENT floating_point_v7_1_3 IS
+  COMPONENT mult_gen_v12_0_12 IS
     GENERIC (
+      C_VERBOSITY : INTEGER;
+      C_MODEL_TYPE : INTEGER;
+      C_OPTIMIZE_GOAL : INTEGER;
       C_XDEVICEFAMILY : STRING;
-      C_HAS_ADD : INTEGER;
-      C_HAS_SUBTRACT : INTEGER;
-      C_HAS_MULTIPLY : INTEGER;
-      C_HAS_DIVIDE : INTEGER;
-      C_HAS_SQRT : INTEGER;
-      C_HAS_COMPARE : INTEGER;
-      C_HAS_FIX_TO_FLT : INTEGER;
-      C_HAS_FLT_TO_FIX : INTEGER;
-      C_HAS_FLT_TO_FLT : INTEGER;
-      C_HAS_RECIP : INTEGER;
-      C_HAS_RECIP_SQRT : INTEGER;
-      C_HAS_ABSOLUTE : INTEGER;
-      C_HAS_LOGARITHM : INTEGER;
-      C_HAS_EXPONENTIAL : INTEGER;
-      C_HAS_FMA : INTEGER;
-      C_HAS_FMS : INTEGER;
-      C_HAS_ACCUMULATOR_A : INTEGER;
-      C_HAS_ACCUMULATOR_S : INTEGER;
-      C_A_WIDTH : INTEGER;
-      C_A_FRACTION_WIDTH : INTEGER;
-      C_B_WIDTH : INTEGER;
-      C_B_FRACTION_WIDTH : INTEGER;
-      C_C_WIDTH : INTEGER;
-      C_C_FRACTION_WIDTH : INTEGER;
-      C_RESULT_WIDTH : INTEGER;
-      C_RESULT_FRACTION_WIDTH : INTEGER;
-      C_COMPARE_OPERATION : INTEGER;
+      C_HAS_CE : INTEGER;
+      C_HAS_SCLR : INTEGER;
       C_LATENCY : INTEGER;
-      C_OPTIMIZATION : INTEGER;
-      C_MULT_USAGE : INTEGER;
-      C_BRAM_USAGE : INTEGER;
-      C_RATE : INTEGER;
-      C_ACCUM_INPUT_MSB : INTEGER;
-      C_ACCUM_MSB : INTEGER;
-      C_ACCUM_LSB : INTEGER;
-      C_HAS_UNDERFLOW : INTEGER;
-      C_HAS_OVERFLOW : INTEGER;
-      C_HAS_INVALID_OP : INTEGER;
-      C_HAS_DIVIDE_BY_ZERO : INTEGER;
-      C_HAS_ACCUM_OVERFLOW : INTEGER;
-      C_HAS_ACCUM_INPUT_OVERFLOW : INTEGER;
-      C_HAS_ACLKEN : INTEGER;
-      C_HAS_ARESETN : INTEGER;
-      C_THROTTLE_SCHEME : INTEGER;
-      C_HAS_A_TUSER : INTEGER;
-      C_HAS_A_TLAST : INTEGER;
-      C_HAS_B : INTEGER;
-      C_HAS_B_TUSER : INTEGER;
-      C_HAS_B_TLAST : INTEGER;
-      C_HAS_C : INTEGER;
-      C_HAS_C_TUSER : INTEGER;
-      C_HAS_C_TLAST : INTEGER;
-      C_HAS_OPERATION : INTEGER;
-      C_HAS_OPERATION_TUSER : INTEGER;
-      C_HAS_OPERATION_TLAST : INTEGER;
-      C_HAS_RESULT_TUSER : INTEGER;
-      C_HAS_RESULT_TLAST : INTEGER;
-      C_TLAST_RESOLUTION : INTEGER;
-      C_A_TDATA_WIDTH : INTEGER;
-      C_A_TUSER_WIDTH : INTEGER;
-      C_B_TDATA_WIDTH : INTEGER;
-      C_B_TUSER_WIDTH : INTEGER;
-      C_C_TDATA_WIDTH : INTEGER;
-      C_C_TUSER_WIDTH : INTEGER;
-      C_OPERATION_TDATA_WIDTH : INTEGER;
-      C_OPERATION_TUSER_WIDTH : INTEGER;
-      C_RESULT_TDATA_WIDTH : INTEGER;
-      C_RESULT_TUSER_WIDTH : INTEGER;
-      C_FIXED_DATA_UNSIGNED : INTEGER
+      C_A_WIDTH : INTEGER;
+      C_A_TYPE : INTEGER;
+      C_B_WIDTH : INTEGER;
+      C_B_TYPE : INTEGER;
+      C_OUT_HIGH : INTEGER;
+      C_OUT_LOW : INTEGER;
+      C_MULT_TYPE : INTEGER;
+      C_CE_OVERRIDES_SCLR : INTEGER;
+      C_CCM_IMP : INTEGER;
+      C_B_VALUE : STRING;
+      C_HAS_ZERO_DETECT : INTEGER;
+      C_ROUND_OUTPUT : INTEGER;
+      C_ROUND_PT : INTEGER
     );
     PORT (
-      aclk : IN STD_LOGIC;
-      aclken : IN STD_LOGIC;
-      aresetn : IN STD_LOGIC;
-      s_axis_a_tvalid : IN STD_LOGIC;
-      s_axis_a_tready : OUT STD_LOGIC;
-      s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-      s_axis_a_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-      s_axis_a_tlast : IN STD_LOGIC;
-      s_axis_b_tvalid : IN STD_LOGIC;
-      s_axis_b_tready : OUT STD_LOGIC;
-      s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-      s_axis_b_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-      s_axis_b_tlast : IN STD_LOGIC;
-      s_axis_c_tvalid : IN STD_LOGIC;
-      s_axis_c_tready : OUT STD_LOGIC;
-      s_axis_c_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-      s_axis_c_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-      s_axis_c_tlast : IN STD_LOGIC;
-      s_axis_operation_tvalid : IN STD_LOGIC;
-      s_axis_operation_tready : OUT STD_LOGIC;
-      s_axis_operation_tdata : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-      s_axis_operation_tuser : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-      s_axis_operation_tlast : IN STD_LOGIC;
-      m_axis_result_tvalid : OUT STD_LOGIC;
-      m_axis_result_tready : IN STD_LOGIC;
-      m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-      m_axis_result_tuser : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
-      m_axis_result_tlast : OUT STD_LOGIC
+      CLK : IN STD_LOGIC;
+      A : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      CE : IN STD_LOGIC;
+      SCLR : IN STD_LOGIC;
+      P : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
     );
-  END COMPONENT floating_point_v7_1_3;
+  END COMPONENT mult_gen_v12_0_12;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF multiplier_core_arch: ARCHITECTURE IS "floating_point_v7_1_3,Vivado 2016.4";
+  ATTRIBUTE X_CORE_INFO OF multiplier_core_arch: ARCHITECTURE IS "mult_gen_v12_0_12,Vivado 2016.4";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF multiplier_core_arch : ARCHITECTURE IS "multiplier_core,floating_point_v7_1_3,{}";
+  ATTRIBUTE CHECK_LICENSE_TYPE OF multiplier_core_arch : ARCHITECTURE IS "multiplier_core,mult_gen_v12_0_12,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF multiplier_core_arch: ARCHITECTURE IS "multiplier_core,floating_point_v7_1_3,{x_ipProduct=Vivado 2016.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=floating_point,x_ipVersion=7.1,x_ipCoreRevision=3,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_XDEVICEFAMILY=virtex7,C_HAS_ADD=0,C_HAS_SUBTRACT=0,C_HAS_MULTIPLY=1,C_HAS_DIVIDE=0,C_HAS_SQRT=0,C_HAS_COMPARE=0,C_HAS_FIX_TO_FLT=0,C_HAS_FLT_TO_FIX=0,C_HAS_FLT_TO_FLT=0,C_HAS_RECIP=0,C_HAS_RECIP_SQRT=0,C_HAS_ABSOLUTE=0,C_HAS_LOGARITHM=0,C_HAS_EXPONENTIAL=0,C_HAS_FMA=0,C_HAS_FMS=0,C_HAS_ACCUMUL" & 
-"ATOR_A=0,C_HAS_ACCUMULATOR_S=0,C_A_WIDTH=32,C_A_FRACTION_WIDTH=24,C_B_WIDTH=32,C_B_FRACTION_WIDTH=24,C_C_WIDTH=32,C_C_FRACTION_WIDTH=24,C_RESULT_WIDTH=32,C_RESULT_FRACTION_WIDTH=24,C_COMPARE_OPERATION=8,C_LATENCY=9,C_OPTIMIZATION=1,C_MULT_USAGE=2,C_BRAM_USAGE=0,C_RATE=1,C_ACCUM_INPUT_MSB=32,C_ACCUM_MSB=32,C_ACCUM_LSB=-31,C_HAS_UNDERFLOW=0,C_HAS_OVERFLOW=0,C_HAS_INVALID_OP=0,C_HAS_DIVIDE_BY_ZERO=0,C_HAS_ACCUM_OVERFLOW=0,C_HAS_ACCUM_INPUT_OVERFLOW=0,C_HAS_ACLKEN=0,C_HAS_ARESETN=0,C_THROTTLE_SCHEME" & 
-"=1,C_HAS_A_TUSER=0,C_HAS_A_TLAST=0,C_HAS_B=1,C_HAS_B_TUSER=0,C_HAS_B_TLAST=0,C_HAS_C=0,C_HAS_C_TUSER=0,C_HAS_C_TLAST=0,C_HAS_OPERATION=0,C_HAS_OPERATION_TUSER=0,C_HAS_OPERATION_TLAST=0,C_HAS_RESULT_TUSER=0,C_HAS_RESULT_TLAST=0,C_TLAST_RESOLUTION=0,C_A_TDATA_WIDTH=32,C_A_TUSER_WIDTH=1,C_B_TDATA_WIDTH=32,C_B_TUSER_WIDTH=1,C_C_TDATA_WIDTH=32,C_C_TUSER_WIDTH=1,C_OPERATION_TDATA_WIDTH=8,C_OPERATION_TUSER_WIDTH=1,C_RESULT_TDATA_WIDTH=32,C_RESULT_TUSER_WIDTH=1,C_FIXED_DATA_UNSIGNED=0}";
+  ATTRIBUTE CORE_GENERATION_INFO OF multiplier_core_arch: ARCHITECTURE IS "multiplier_core,mult_gen_v12_0_12,{x_ipProduct=Vivado 2016.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=mult_gen,x_ipVersion=12.0,x_ipCoreRevision=12,x_ipLanguage=VERILOG,x_ipSimLanguage=VHDL,C_VERBOSITY=0,C_MODEL_TYPE=0,C_OPTIMIZE_GOAL=1,C_XDEVICEFAMILY=virtex7,C_HAS_CE=0,C_HAS_SCLR=0,C_LATENCY=1,C_A_WIDTH=32,C_A_TYPE=0,C_B_WIDTH=32,C_B_TYPE=0,C_OUT_HIGH=63,C_OUT_LOW=0,C_MULT_TYPE=0,C_CE_OVERRIDES_SCLR=0,C_CCM_IMP=0,C_B_VALUE=10000001,C_HAS_ZERO_DETECT=0,C_ROUND_OUTPUT=0,C_ROUND_PT=0}";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
-  ATTRIBUTE X_INTERFACE_INFO OF aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk_intf CLK";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_a_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_A TDATA";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_b_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_B TVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_b_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_B TREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axis_b_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 S_AXIS_B TDATA";
-  ATTRIBUTE X_INTERFACE_INFO OF m_axis_result_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 M_AXIS_RESULT TVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF m_axis_result_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 M_AXIS_RESULT TREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF m_axis_result_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 M_AXIS_RESULT TDATA";
+  ATTRIBUTE X_INTERFACE_INFO OF CLK: SIGNAL IS "xilinx.com:signal:clock:1.0 clk_intf CLK";
+  ATTRIBUTE X_INTERFACE_INFO OF A: SIGNAL IS "xilinx.com:signal:data:1.0 a_intf DATA";
+  ATTRIBUTE X_INTERFACE_INFO OF B: SIGNAL IS "xilinx.com:signal:data:1.0 b_intf DATA";
+  ATTRIBUTE X_INTERFACE_INFO OF P: SIGNAL IS "xilinx.com:signal:data:1.0 p_intf DATA";
 BEGIN
-  U0 : floating_point_v7_1_3
+  U0 : mult_gen_v12_0_12
     GENERIC MAP (
+      C_VERBOSITY => 0,
+      C_MODEL_TYPE => 0,
+      C_OPTIMIZE_GOAL => 1,
       C_XDEVICEFAMILY => "virtex7",
-      C_HAS_ADD => 0,
-      C_HAS_SUBTRACT => 0,
-      C_HAS_MULTIPLY => 1,
-      C_HAS_DIVIDE => 0,
-      C_HAS_SQRT => 0,
-      C_HAS_COMPARE => 0,
-      C_HAS_FIX_TO_FLT => 0,
-      C_HAS_FLT_TO_FIX => 0,
-      C_HAS_FLT_TO_FLT => 0,
-      C_HAS_RECIP => 0,
-      C_HAS_RECIP_SQRT => 0,
-      C_HAS_ABSOLUTE => 0,
-      C_HAS_LOGARITHM => 0,
-      C_HAS_EXPONENTIAL => 0,
-      C_HAS_FMA => 0,
-      C_HAS_FMS => 0,
-      C_HAS_ACCUMULATOR_A => 0,
-      C_HAS_ACCUMULATOR_S => 0,
+      C_HAS_CE => 0,
+      C_HAS_SCLR => 0,
+      C_LATENCY => 1,
       C_A_WIDTH => 32,
-      C_A_FRACTION_WIDTH => 24,
+      C_A_TYPE => 0,
       C_B_WIDTH => 32,
-      C_B_FRACTION_WIDTH => 24,
-      C_C_WIDTH => 32,
-      C_C_FRACTION_WIDTH => 24,
-      C_RESULT_WIDTH => 32,
-      C_RESULT_FRACTION_WIDTH => 24,
-      C_COMPARE_OPERATION => 8,
-      C_LATENCY => 9,
-      C_OPTIMIZATION => 1,
-      C_MULT_USAGE => 2,
-      C_BRAM_USAGE => 0,
-      C_RATE => 1,
-      C_ACCUM_INPUT_MSB => 32,
-      C_ACCUM_MSB => 32,
-      C_ACCUM_LSB => -31,
-      C_HAS_UNDERFLOW => 0,
-      C_HAS_OVERFLOW => 0,
-      C_HAS_INVALID_OP => 0,
-      C_HAS_DIVIDE_BY_ZERO => 0,
-      C_HAS_ACCUM_OVERFLOW => 0,
-      C_HAS_ACCUM_INPUT_OVERFLOW => 0,
-      C_HAS_ACLKEN => 0,
-      C_HAS_ARESETN => 0,
-      C_THROTTLE_SCHEME => 1,
-      C_HAS_A_TUSER => 0,
-      C_HAS_A_TLAST => 0,
-      C_HAS_B => 1,
-      C_HAS_B_TUSER => 0,
-      C_HAS_B_TLAST => 0,
-      C_HAS_C => 0,
-      C_HAS_C_TUSER => 0,
-      C_HAS_C_TLAST => 0,
-      C_HAS_OPERATION => 0,
-      C_HAS_OPERATION_TUSER => 0,
-      C_HAS_OPERATION_TLAST => 0,
-      C_HAS_RESULT_TUSER => 0,
-      C_HAS_RESULT_TLAST => 0,
-      C_TLAST_RESOLUTION => 0,
-      C_A_TDATA_WIDTH => 32,
-      C_A_TUSER_WIDTH => 1,
-      C_B_TDATA_WIDTH => 32,
-      C_B_TUSER_WIDTH => 1,
-      C_C_TDATA_WIDTH => 32,
-      C_C_TUSER_WIDTH => 1,
-      C_OPERATION_TDATA_WIDTH => 8,
-      C_OPERATION_TUSER_WIDTH => 1,
-      C_RESULT_TDATA_WIDTH => 32,
-      C_RESULT_TUSER_WIDTH => 1,
-      C_FIXED_DATA_UNSIGNED => 0
+      C_B_TYPE => 0,
+      C_OUT_HIGH => 63,
+      C_OUT_LOW => 0,
+      C_MULT_TYPE => 0,
+      C_CE_OVERRIDES_SCLR => 0,
+      C_CCM_IMP => 0,
+      C_B_VALUE => "10000001",
+      C_HAS_ZERO_DETECT => 0,
+      C_ROUND_OUTPUT => 0,
+      C_ROUND_PT => 0
     )
     PORT MAP (
-      aclk => aclk,
-      aclken => '1',
-      aresetn => '1',
-      s_axis_a_tvalid => s_axis_a_tvalid,
-      s_axis_a_tready => s_axis_a_tready,
-      s_axis_a_tdata => s_axis_a_tdata,
-      s_axis_a_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
-      s_axis_a_tlast => '0',
-      s_axis_b_tvalid => s_axis_b_tvalid,
-      s_axis_b_tready => s_axis_b_tready,
-      s_axis_b_tdata => s_axis_b_tdata,
-      s_axis_b_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
-      s_axis_b_tlast => '0',
-      s_axis_c_tvalid => '0',
-      s_axis_c_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 32)),
-      s_axis_c_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
-      s_axis_c_tlast => '0',
-      s_axis_operation_tvalid => '0',
-      s_axis_operation_tdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 8)),
-      s_axis_operation_tuser => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
-      s_axis_operation_tlast => '0',
-      m_axis_result_tvalid => m_axis_result_tvalid,
-      m_axis_result_tready => m_axis_result_tready,
-      m_axis_result_tdata => m_axis_result_tdata
+      CLK => CLK,
+      A => A,
+      B => B,
+      CE => '1',
+      SCLR => '0',
+      P => P
     );
 END multiplier_core_arch;
