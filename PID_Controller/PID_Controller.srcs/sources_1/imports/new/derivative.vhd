@@ -21,10 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use ieee.fixed_pkg.all;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -36,145 +34,61 @@ entity derivative is
     Port ( i_clk : in STD_LOGIC;
            i_adc_clk : in STD_LOGIC;
            i_error : in STD_LOGIC_VECTOR (31 downto 0);
-           i_error_tvalid : in STD_LOGIC;
            i_kd : in STD_LOGIC_VECTOR (31 downto 0);
-           i_kd_tvalid : in STD_LOGIC;
-           o_D_result : out STD_LOGIC_VECTOR (31 downto 0);
-           o_D_tvalid : out STD_LOGIC;
-           i_D_tready : in STD_LOGIC);
+           o_D_result : out STD_LOGIC_VECTOR (31 downto 0));
 end derivative;
 
 architecture Behavioral of derivative is
 
 COMPONENT multiplier_core
       PORT (
-        aclk : IN STD_LOGIC;
-        s_axis_a_tvalid : IN STD_LOGIC;
-        s_axis_a_tready : OUT STD_LOGIC;
-        s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        s_axis_b_tvalid : IN STD_LOGIC;
-        s_axis_b_tready : OUT STD_LOGIC;
-        s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        m_axis_result_tvalid : OUT STD_LOGIC;
-        m_axis_result_tready : IN STD_LOGIC;
-        m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-      );
-    END COMPONENT;
-    
-    COMPONENT accumulator_core
-      PORT (
-        aclk : IN STD_LOGIC;
-        s_axis_a_tvalid : IN STD_LOGIC;
-        s_axis_a_tready : OUT STD_LOGIC;
-        s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-        s_axis_a_tlast : IN STD_LOGIC;
-        m_axis_result_tvalid : OUT STD_LOGIC;
-        m_axis_result_tready : IN STD_LOGIC;
-        m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-        m_axis_result_tlast : OUT STD_LOGIC
-      );
-    END COMPONENT;
-      
-    COMPONENT subtractor_core
-        PORT (
-            aclk : IN STD_LOGIC;
-            s_axis_a_tvalid : IN STD_LOGIC;
-            s_axis_a_tready : OUT STD_LOGIC;
-            s_axis_a_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            s_axis_b_tvalid : IN STD_LOGIC;
-            s_axis_b_tready : OUT STD_LOGIC;
-            s_axis_b_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-            m_axis_result_tvalid : OUT STD_LOGIC;
-            m_axis_result_tready : IN STD_LOGIC;
-            m_axis_result_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        CLK : IN STD_LOGIC;
+        A : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+        P : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
         );
     END COMPONENT;
     
-    signal s_buf_kd, s_buf_valid_kd, s_buf_error, s_buf_valid_error : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
-    signal s_kd_tready, s_kd_tvalid : STD_LOGIC := '0';
-    signal s_error_tready, s_error_tvalid : STD_LOGIC := '0';
-    signal s_scaled_error : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
-    signal s_scaled_error_tready, s_scaled_error_tvalid : STD_LOGIC := '0';
-    signal s_sent : STD_LOGIC := '0';
-    
-    signal s_integrated_output, s_cutoff_output, s_cutoff_input : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
-    signal s_cutoff_output_tready, s_cutoff_output_tvalid : STD_LOGIC := '0';
-    signal s_cutoff_input_tready, s_cutoff_input_tvalid : STD_LOGIC := '0';
-    signal s_integrated_output_tready, s_integrated_output_tvalid : STD_LOGIC := '0';
+
+    signal s_scaled_error_slv, s_cutoff_output_slv : STD_LOGIC_VECTOR (63 downto 0) := (others => '0');                 -- 28 integer part and 36 fraction part 
+
+    signal s_integrated_output_slv, s_cutoff_input_slv : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+    signal s_buf_output, s_buf_scaled_error : STD_LOGIC_VECTOR (31 downto 0) := (others => '0');
+
+    signal s_scaled_error, s_cutoff_input, s_integrated_output, s_cutoff_output : sfixed(13 downto -18):= (others => '0');
 
 begin
 
-    kd_mult : multiplier_core                       --the inputted error is multiplied by Kd
+    kd_multiplier : multiplier_core
         PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_kd_tvalid,
-            s_axis_a_tready => s_kd_tready,
-            s_axis_a_tdata => s_buf_kd,
-            s_axis_b_tvalid => s_error_tvalid,
-            s_axis_b_tready => s_error_tready,
-            s_axis_b_tdata => s_buf_error,
-            m_axis_result_tvalid => s_scaled_error_tvalid, 
-            m_axis_result_tready => s_scaled_error_tready, 
-            m_axis_result_tdata => s_scaled_error  
-        );
-
-    loop_subtraction: subtractor_core                                      --loop subtraction
+            CLK => i_clk,
+            A => i_kd,                                                      --32bit signed  (14-integer, 18-fraction)
+            B => i_error,                                                   --32bit signed  (14-integer, 18-fraction)
+            P => s_scaled_error_slv                                         -- 64bit signed (28-integer part, 36 fraction)
+        );   
+   
+    cutoff_multiplier : multiplier_core
         PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_scaled_error_tvalid,
-            s_axis_a_tready => s_scaled_error_tready,
-            s_axis_a_tdata => s_scaled_error,
-            s_axis_b_tvalid => s_integrated_output_tvalid,              
-            s_axis_b_tready => s_integrated_output_tready,
-            s_axis_b_tdata => s_integrated_output,
-            m_axis_result_tvalid => s_cutoff_input_tvalid,
-            m_axis_result_tready => s_cutoff_input_tready,
-            m_axis_result_tdata => s_cutoff_input
-        );
-
-    cutoff_mult : multiplier_core                       --multiplying with cutoff inside the feedback loop
-        PORT MAP (
-            aclk => i_clk,
-            s_axis_a_tvalid => s_cutoff_input_tvalid,                --check the tvalid and tready signals  @@@@@@@@@@@@@@@@@@@@@
-            s_axis_a_tready => s_cutoff_input_tready,
-            s_axis_a_tdata => g_cutoff,
-            s_axis_b_tvalid => s_cutoff_input_tvalid,
-            s_axis_b_tready => s_cutoff_input_tready,
-            s_axis_b_tdata => s_cutoff_input,
-            m_axis_result_tvalid => s_cutoff_output_tvalid,
-            m_axis_result_tready => s_cutoff_output_tready,
-            m_axis_result_tdata => s_cutoff_output
-        );
-
-    feedback_integral_path : accumulator_core       --integral accumulator for the feedback loop
-        PORT MAP (
-            aclk => i_adc_clk,
-            s_axis_a_tvalid => s_cutoff_output_tvalid,
-            s_axis_a_tready => s_cutoff_output_tready,
-            s_axis_a_tdata => s_cutoff_output,
-            s_axis_a_tlast => '0',  -- Change: Use to reset
-            m_axis_result_tvalid => s_integrated_output_tvalid,
-            m_axis_result_tready => s_integrated_output_tready,
-            m_axis_result_tdata => s_integrated_output
+            CLK => i_clk,
+            A => s_cutoff_input_slv,                                                --32bit signed  (14-integer, 18-fraction)
+            B => g_cutoff,                                                          --32bit signed  (14-integer, 18-fraction)
+            P => s_cutoff_output_slv                                                -- 64bit signed (28-integer part, 36-fraction)
         );
     
-    s_buf_valid_error <= i_error when i_error_tvalid = '1' else s_buf_valid_error; -- last error that is valid
-    s_buf_error <= s_buf_valid_error when s_error_tready = '1' else s_buf_error; -- if multiplier is ready, send last error
-    s_error_tvalid <= '1' when i_error_tvalid='1' else '0' when s_sent='1' else s_error_tvalid; -- raise whenever, keep until sent, reset after sending.
     
-    s_buf_valid_kd <= i_kd when i_kd_tvalid = '1' else s_buf_valid_kd; -- last kd that is valid
-    s_buf_kd <= s_buf_valid_kd when s_kd_tready = '1' else s_buf_kd; -- if multiplier is ready, send last kd
-    s_kd_tvalid <= '1' when i_kd_tvalid='1' else '0' when s_sent='1' else s_kd_tvalid; -- raise whenever, keep until sent, reset after sending.
-
-    o_D_result <= s_cutoff_output;                 
-    o_D_tvalid <= s_cutoff_output_tvalid;
-    s_cutoff_output_tready <= i_D_tready;
-
+    s_scaled_error <= to_sfixed(s_scaled_error_slv, s_scaled_error); 
+    s_cutoff_output <= to_sfixed(s_cutoff_output_slv, s_cutoff_output);  
+    s_cutoff_input_slv <= to_slv(s_cutoff_input);
+    
     process(i_clk)
     begin
-        if rising_edge(i_clk) then
-            s_sent <= s_error_tvalid and s_error_tready and s_kd_tvalid and s_kd_tready;
+        if rising_edge(i_clk) then                
+            s_cutoff_input <= s_scaled_error - s_integrated_output;                                                --Loop subtraction
+            s_integrated_output <= resize(s_integrated_output + s_cutoff_output, s_integrated_output);             --Integration
+                
         end if;
     end process;
+
+    o_D_result <= to_slv(s_cutoff_output); 
     
 end Behavioral;

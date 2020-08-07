@@ -2,45 +2,12 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Sun Aug 02 10:37:24 2020
-# Process ID: 27520
-# Current directory: C:/Users/90534/Desktop/sum proj/PID_Controller
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent30952 C:\Users\90534\Desktop\sum proj\PID_Controller\PID_Controller.xpr
-# Log file: C:/Users/90534/Desktop/sum proj/PID_Controller/vivado.log
-# Journal file: C:/Users/90534/Desktop/sum proj/PID_Controller\vivado.jou
+# Start of session at: Fri Aug 07 22:53:11 2020
+# Process ID: 19060
+# Current directory: C:/Users/90534/Desktop/sum pro/PID_Controller
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22008 C:\Users\90534\Desktop\sum pro\PID_Controller\PID_Controller.xpr
+# Log file: C:/Users/90534/Desktop/sum pro/PID_Controller/vivado.log
+# Journal file: C:/Users/90534/Desktop/sum pro/PID_Controller\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.xpr}
-reset_run synth_1
-launch_runs synth_1 -jobs 10
-wait_on_run synth_1
-reset_run synth_1
-launch_runs synth_1 -jobs 10
-wait_on_run synth_1
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-set_property SOURCE_SET sources_1 [get_filesets sim_1]
-file mkdir C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new
-file mkdir {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new}
-close [ open {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new/Proportional_tb.vhd} w ]
-add_files -fileset sim_1 {{C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new/Proportional_tb.vhd}}
-generate_target Simulation [get_files {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.xci}]
-export_ip_user_files -of_objects [get_files {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/fixed_to_float/fixed_to_float.xci}] -no_script -force -quiet
-launch_simulation
-set_property top proportional_tb [get_filesets sim_1]
-set_property top_lib xil_defaultlib [get_filesets sim_1]
-set_property simulator_language VHDL [current_project]
-generate_target Simulation [get_files {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci}]
-export_ip_user_files -of_objects [get_files {C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core.xci}] -no_script -force -quiet
-launch_simulation
-set_property is_enabled false [get_files  {{C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sources_1/imports/new/top_module.vhd}}]
-update_compile_order -fileset sources_1
-undo
-remove_files  -fileset sim_1 {{C:/Users/90534/Desktop/sum proj/PID_Controller/PID_Controller.srcs/sim_1/new/Proportional_tb.vhd}}
-set_property top top_module [get_filesets sim_1]
-reset_run synth_1
-launch_runs synth_1 -jobs 10
-wait_on_run synth_1
+open_project {C:/Users/90534/Desktop/sum pro/PID_Controller/PID_Controller.xpr}
