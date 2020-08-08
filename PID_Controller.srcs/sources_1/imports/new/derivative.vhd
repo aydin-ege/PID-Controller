@@ -83,7 +83,7 @@ begin
     process(i_clk)
     begin
         if rising_edge(i_clk) then                
-            s_cutoff_input <= s_scaled_error - s_integrated_output;                                                --Loop subtraction
+            s_cutoff_input <= resize(s_scaled_error - s_integrated_output, s_cutoff_input);                                                --Loop subtraction
             s_integrated_output <= resize(s_integrated_output + s_cutoff_output, s_integrated_output);             --Integration
                 
         end if;
