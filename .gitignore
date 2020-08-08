@@ -1,4 +1,14 @@
 *
-!.vhd
-!.xpr
-!.v
+!*.vhd
+!*.xpr
+!*/
+!PID_Controller.srcs/
+!PID_Controller.srcs/*
+!PID_Controller.srcs/*/
+!PID_Controller.srcs/*/*
+!PID_Controller.srcs/*/*/
+!PID_Controller.srcs/*/*/*
+!PID_Controller.srcs/*/*/*/
+!PID_Controller.srcs/*/*/*/*
+!PID_Controller.srcs/*/*/*/*/
+!PID_Controller.srcs/*/*/*/*/*
