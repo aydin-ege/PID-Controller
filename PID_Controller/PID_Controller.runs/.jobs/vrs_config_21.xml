@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<Runs Version="1" Minor="0">
-	<Run Id="accumulator_core_synth_1" LaunchDir="D:/my/Vivado/PID_Controller/PID_Controller.runs/accumulator_core_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
-</Runs>
-
