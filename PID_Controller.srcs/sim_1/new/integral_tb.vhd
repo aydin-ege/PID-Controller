@@ -23,16 +23,20 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 use IEEE.NUMERIC_STD.ALL;
-use ieee.fixed_pkg.all;
+library ieee_proposed;
+use ieee_proposed.fixed_pkg.all;
 
 entity integral_tb is
 end integral_tb;
 
 architecture Behavioral of integral_tb is
-    signal clk, i_adc_clk : STD_LOGIC := '0';
-    signal s_result : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+    signal clk, adc_clk : STD_LOGIC := '0';
+    signal s_result, ki, error : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
 begin
     clk <= not clk after 10ns;
+    adc_clk <= not adc_clk after 20ns;
+    error <= to_slv(to_sfixed(1, 13, -18)), to_slv(to_sfixed(2, 13, -18)) after 100ns, to_slv(to_sfixed(-3, 13, -18)) after 200ns,  to_slv(to_sfixed(9, 13, -18)) after 200000ns;
+    ki <= to_slv(to_sfixed(1, 13, -18)), to_slv(to_sfixed(0.333333, 13, -18)) after 500ns;
     
     Integral : entity work.integral(Behavioral)
         Generic map( 
@@ -42,8 +46,8 @@ begin
         Port map( 
             i_clk => clk,
             i_adc_clk => clk,
-            i_error => to_slv(to_sfixed(1, 13, -18)),
-            i_ki => to_slv(to_sfixed(1, 13, -18)),
+            i_error => error,
+            i_ki => ki,
             o_I_result => s_result
         );
 

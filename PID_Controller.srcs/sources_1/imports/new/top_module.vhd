@@ -25,7 +25,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-use IEEE.fixed_pkg.ALL;
+library ieee_proposed;
+use ieee_proposed.fixed_pkg.all;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
@@ -90,7 +91,7 @@ begin
     
     Derivative : entity work.derivative (Behavioral)
         generic map (
-            g_cutoff => (others => '0')                             -- will check later
+            g_cutoff => to_slv(to_sfixed(1000, 13, -18))     -- will check later
         )
         port map ( 
             i_clk => i_clk,
