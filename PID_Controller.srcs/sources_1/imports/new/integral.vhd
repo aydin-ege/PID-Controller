@@ -23,7 +23,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
+-- arithmetic functions with Signed or Unsigned value
 use IEEE.NUMERIC_STD.ALL;
 use ieee.fixed_pkg.all;
 
@@ -58,7 +58,8 @@ architecture Behavioral of integral is
     
     signal s_buf_I_result, s_before_output  : sfixed(13 downto -18) := (others => '0');
     signal s_scaled_error, s_buf_scaled_error, s_until_max : sfixed(13 downto -18) := (others => '0');
-    signal s_scaled_error_vector : STD_LOGIC_VECTOR(63 downto 0) := (others => '0');
+    signal s_scaled_error_slv : STD_LOGIC_VECTOR(63 downto 0) := (others => '0');
+    signal foo : sfixed(27 downto -36) := (others => '0');
 begin    
     
     ki_mult : multiplier_core
@@ -66,9 +67,10 @@ begin
             CLK => i_clk,
             A => i_ki,
             B => i_error,
-            P => s_scaled_error_vector
+            P => s_scaled_error_slv
         );
-    s_scaled_error <= to_sfixed(s_scaled_error_vector, s_scaled_error);  
+    foo <= to_sfixed(s_scaled_error_slv, foo);
+    s_scaled_error <= resize(foo, s_scaled_error);  
     s_before_output <= resize(abs(s_scaled_error + s_buf_I_result), s_before_output);  
     
     process(i_adc_clk)
