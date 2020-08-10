@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
--- Date        : Sun Aug 09 18:38:33 2020
--- Host        : Ege-PC running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl
+-- Date        : Mon Aug 10 21:04:28 2020
+-- Host        : Erdem running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode synth_stub {C:/Users/90534/Desktop/summ
+--               proj/PID_Controller.srcs/sources_1/ip/multiplier_core/multiplier_core_stub.vhdl}
 -- Design      : multiplier_core
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7vx485tffg1761-2

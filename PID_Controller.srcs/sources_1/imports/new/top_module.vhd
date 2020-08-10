@@ -57,6 +57,7 @@ architecture Behavioral of top_module is
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
     signal s_buf_kp, s_buf_ki, s_buf_kd : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
     
+
     signal s_P_overflow, s_I_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
 
 begin 
@@ -103,7 +104,7 @@ begin
             i_error => s_error,
             i_kd => s_buf_kd,
             o_D_result => s_D_result,
-            o_overflow => s_D_overflow
+            o_failure => s_D_overflow
         );
                  
     PID_sum : entity work.PID_to_output(Behavioral)
