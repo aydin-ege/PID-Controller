@@ -77,8 +77,8 @@ begin
         );
     
     
-    s_scaled_error <= to_sfixed(s_scaled_error_slv, s_scaled_error); 
-    s_cutoff_output <= to_sfixed(s_cutoff_output_slv, s_cutoff_output);  
+    s_scaled_error <= resize(to_sfixed(s_scaled_error_slv, 27, -36), s_scaled_error);  
+    s_cutoff_output <= resize(to_sfixed(s_cutoff_output_slv, 27, -36), s_cutoff_output);
     s_cutoff_input_slv <= to_slv(s_cutoff_input);
     
     process(i_clk)
