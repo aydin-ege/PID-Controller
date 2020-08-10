@@ -158,6 +158,11 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/derivative_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="derivative_tb"/>
@@ -167,6 +172,7 @@
         <Option Name="SrcSet" Val="sources_1"/>
         <Option Name="XSimWcfgFile" Val="$PSIMDIR/integral_tb_behav.wcfg"/>
         <Option Name="XSimWcfgFile" Val="$PSIMDIR/proportional_tb_behav.wcfg"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/derivative_tb_behav.wcfg"/>
       </Config>
     </FileSet>
     <FileSet Name="multiplier_core" Type="BlockSrcs" RelSrcDir="$PSRCDIR/multiplier_core">
