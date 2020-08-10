@@ -40,7 +40,7 @@ begin
     
     Derivative : entity work.derivative(Behavioral)
         Generic map( 
-            g_cutoff => to_slv(to_sfixed(1000, 13, -18))
+            g_cutoff => to_slv(to_sfixed(1, 13, -18))
         )
         Port map( 
             i_clk => clk,

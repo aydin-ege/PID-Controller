@@ -58,6 +58,7 @@ architecture Behavioral of top_module is
     signal s_buf_kp, s_buf_ki, s_buf_kd : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
     
     signal s_cutoff : STD_LOGIC_VECTOR(31 downto 0) := (others=> '0'); 
+    signal s_D_failure : STD_LOGIC;
 
 begin
     s_buf_feedback <= i_feedback when i_feedback_tvalid = '1' else s_buf_feedback; -- last valid feedback
@@ -98,7 +99,8 @@ begin
             i_adc_clk => i_adc_clk,
             i_error => s_error,
             i_kd => s_buf_kd,
-            o_D_result => s_D_result
+            o_D_result => s_D_result,
+            o_failure => s_D_failure
         );
                  
     PID_sum : entity work.PID_to_output(Behavioral)
