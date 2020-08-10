@@ -47,7 +47,7 @@ entity top_module is
         i_kd : in STD_LOGIC_VECTOR (31 downto 0);
         i_kd_tvalid : in STD_LOGIC;
         o_output : out STD_LOGIC_VECTOR (11 downto 0);
-        o_failure : out STD_LOGIC
+        o_overflow : out STD_LOGIC
     );
 end top_module;
 
@@ -57,10 +57,12 @@ architecture Behavioral of top_module is
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
     signal s_buf_kp, s_buf_ki, s_buf_kd : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
     
-    signal s_cutoff : STD_LOGIC_VECTOR(31 downto 0) := (others=> '0'); 
-    signal s_D_failure : STD_LOGIC;
 
-begin
+    signal s_P_overflow, s_I_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
+
+begin 
+    o_overflow <= s_P_overflow or s_I_overflow or s_D_overflow or s_PID_overflow;
+
     s_buf_feedback <= i_feedback when i_feedback_tvalid = '1' else s_buf_feedback; -- last valid feedback
     s_buf_reference <= i_reference when i_reference_tvalid = '1' else s_buf_reference; -- last valid reference
     s_buf_kp <= i_kp when i_kp_tvalid = '1' else s_buf_kp;
@@ -71,10 +73,11 @@ begin
         
     Proportional : entity work.proportional(Behavioral)
         port map(
-            i_clk => i_clk,
+            i_adc_clk => i_adc_clk,
             i_error => s_error,
             i_kp => s_buf_kp,
-            o_P_result => s_P_result
+            o_P_result => s_P_result,
+            o_overflow => s_D_overflow
         );
         
     Integral : entity work.integral(Behavioral)
@@ -87,7 +90,8 @@ begin
             i_adc_clk => i_adc_clk,
             i_error => s_error,
             i_ki => s_buf_ki,
-            o_I_result => s_I_result
+            o_I_result => s_I_result,
+            o_overflow => s_I_overflow
         ); 
     
     Derivative : entity work.derivative (Behavioral)
@@ -100,7 +104,7 @@ begin
             i_error => s_error,
             i_kd => s_buf_kd,
             o_D_result => s_D_result,
-            o_failure => s_D_failure
+            o_failure => s_D_overflow
         );
                  
     PID_sum : entity work.PID_to_output(Behavioral)
@@ -109,7 +113,7 @@ begin
             i_I_result => s_I_result,
             i_D_result => s_D_result,
             o_output => o_output,
-            o_failure => o_failure
+            o_overflow => s_PID_overflow
         );
 
 end Behavioral;

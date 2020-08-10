@@ -43,7 +43,8 @@ entity integral is
         i_adc_clk : in STD_LOGIC;
         i_error : in STD_LOGIC_VECTOR (31 downto 0);
         i_ki : in STD_LOGIC_VECTOR (31 downto 0);
-        o_I_result : out STD_LOGIC_VECTOR (31 downto 0)
+        o_I_result : out STD_LOGIC_VECTOR (31 downto 0);
+        o_overflow : out STD_LOGIC
     );
 end integral;
 
@@ -64,17 +65,19 @@ begin
     
     ki_mult : multiplier_core
         PORT MAP (
-            CLK => i_clk,
+            CLK => i_adc_clk,
             A => i_ki,
             B => i_error,
             P => s_scaled_error_slv
         );
     s_scaled_error <= resize(to_sfixed(s_scaled_error_slv, 27, -36), s_scaled_error);  
     s_before_output <= resize(abs(s_scaled_error + s_buf_I_result), s_before_output);  
+    o_overflow <= '1' when s_scaled_error > to_sfixed(4095, 27, -36) or s_scaled_error < to_sfixed(-4096, 27, -36) else '0';
+
     
     process(i_adc_clk)
     begin
-        if rising_edge(i_adc_clk) then
+        if falling_edge(i_adc_clk) then
             if s_buf_I_result + s_scaled_error < g_max_accumulator and s_buf_I_result + s_scaled_error > g_min_accumulator then
                 s_buf_I_result <= resize(s_buf_I_result + s_scaled_error, s_buf_I_result);
             else
