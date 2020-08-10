@@ -22,20 +22,16 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+use IEEE.NUMERIC_STD.ALL;
+library ieee_proposed;
+use ieee_proposed.fixed_pkg.all;
 
 entity proportional is
-    Port ( i_clk : in STD_LOGIC;
+    Port ( i_adc_clk : in STD_LOGIC;
            i_error : in STD_LOGIC_VECTOR (31 downto 0);
            i_kp : in STD_LOGIC_VECTOR (31 downto 0);
-           o_P_result : out STD_LOGIC_VECTOR (31 downto 0));
+           o_P_result : out STD_LOGIC_VECTOR (31 downto 0);
+           o_overflow : out STD_LOGIC);
 end proportional;
 
 architecture Behavioral of proportional is
@@ -53,12 +49,19 @@ begin
 
     Proportional : multiplier_core
         PORT MAP (
-            CLK => i_clk,
+            CLK => i_adc_clk,
             A => i_kp,
             B => i_error,
             P => s_P_result
         );
-
-     o_P_result <= s_P_result(63) & s_P_result(48 downto 18); -- TODO: overflow indicator
+        
+    o_overflow <= '1' when to_sfixed(s_P_result, 27, -36) > to_sfixed(4095, 27, -36) or to_sfixed(s_P_result, 27, -36) < to_sfixed(-4096, 27, -36) else '0';
+        
+    process(i_adc_clk)
+    begin
+        if falling_edge(i_adc_clk) then       
+            o_P_result <= to_slv(resize(to_sfixed(s_P_result, 27, -36), 13, -18));
+        end if;
+    end process;
 
 end Behavioral;
