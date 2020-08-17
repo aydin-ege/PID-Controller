@@ -81,7 +81,9 @@ begin
     
     Derivative : entity work.derivative (Behavioral)
         generic map (
-            g_cutoff => to_slv(to_sfixed(1000, 13, -18))     -- will check later
+            g_cutoff => to_sfixed(3.3394404818866, 13, -18),
+            g_clk_frequency => 10000,
+            g_ADC_range => to_sfixed(10, 13, -18)    
         )
         port map ( 
             i_adc_clk => i_adc_clk,
