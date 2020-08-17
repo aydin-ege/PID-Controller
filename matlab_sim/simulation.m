@@ -18,7 +18,7 @@ yda = linspace(0,0,100);
 fb = linspace(0,0,100);
 out = linspace(0,0,100);
 e = linspace(0,0,100);
-b=0;
+T=0.0001;
 
 for a= 2:99
     % Proportional
@@ -29,18 +29,18 @@ for a= 2:99
     
     % Derivative
     y_d(a+1) = (((K_d *e(a))- yda(a-1)) * N);
-    yda(a)= y_d(a+1) + yda(a-1);
+    yda(a)= T*y_d(a+1) + yda(a-1);
     
-    out(a)=  y_p(a+1) + y_i(a+1); %+ y_d(a+1);
+    fb(a)=  y_p(a) + y_i(a)- y_d(a);
     
-    if out(a)>4095
-        fb(a+1) = 4095;
-    elseif out(a) < 0
-        fb(a+1) = 0;
-    else
-        fb(a+1) = out(a);
-    end
-    e(a+1) = ref(a) - fb(a+1);
+%     if out(a)>4095
+%         fb(a) = 4095;
+%     elseif out(a) < 0
+%         fb(a) = 0;
+%     else
+%         fb(a) = out(a);
+%     end
+    e(a+1) = ref(a) - fb(a);
 end
 figure(1);
 stem(n,y_p,'.');
@@ -61,9 +61,9 @@ ylabel('y_d');
 title('Derivative term');
  
 figure(5);
-stem(n,yda,'.');
+stem(n,e,'.');
 xlabel('n');
-ylabel('y_d');
+ylabel('error');
 
 figure(4)
 stem(n, fb);
@@ -74,5 +74,3 @@ stem(n1, ref, '.');
 hold off
 
 title('Error and Reference');
-
-pid()
