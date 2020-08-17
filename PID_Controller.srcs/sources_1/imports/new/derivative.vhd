@@ -59,28 +59,33 @@ COMPONENT multiplier_core
 
     signal s_scaled_error, s_cutoff_input, s_integrated_output, s_cutoff_output : sfixed(13 downto -18):= (others => '0');
     
+    signal s_kd, s_error : sfixed(13 downto -18):= (others => '0');
     signal s_overflow_1, s_overflow_2, s_overflow_3 : STD_LOGIC;
 
 begin
 
-    kd_multiplier : multiplier_core
-        PORT MAP (
-            CLK => i_adc_clk,
-            A => i_kd,                                                      --32bit signed  (14-integer, 18-fraction)
-            B => i_error,                                                   --32bit signed  (14-integer, 18-fraction)
-            P => s_scaled_error_slv                                         -- 64bit signed (28-integer part, 36 fraction)
-        );   
+--    kd_multiplier : multiplier_core
+--        PORT MAP (
+--            CLK => i_adc_clk,
+--            A => i_kd,                                                      --32bit signed  (14-integer, 18-fraction)
+--            B => i_error,                                                   --32bit signed  (14-integer, 18-fraction)
+--            P => s_scaled_error_slv                                         -- 64bit signed (28-integer part, 36 fraction)
+--        );   
    
     cutoff_multiplier : multiplier_core
         PORT MAP (
             CLK => i_adc_clk,
             A => s_cutoff_input_slv,                                                --32bit signed  (14-integer, 18-fraction)
             B => g_cutoff,                                                          --32bit signed  (14-integer, 18-fraction)
-            P => s_cutoff_output_slv                                                -- 64bit signed (28-integer part, 36-fraction)
+            P => s_cutoff_output_slv                                                --64bit signed (28-integer part, 36-fraction)
         );
     
     
-    s_scaled_error <= resize(to_sfixed(s_scaled_error_slv, 27, -36), s_scaled_error);  
+--    s_scaled_error <= resize(to_sfixed(s_scaled_error_slv, 27, -36), s_scaled_error);  
+    s_kd <= to_sfixed(i_kd, s_kd);
+    s_error <= to_sfixed(i_error, s_error);
+    s_scaled_error <= resize(s_kd * s_error, s_scaled_error);
+    
     s_cutoff_output <= resize(to_sfixed(s_cutoff_output_slv, 27, -36), s_cutoff_output);
     s_cutoff_input_slv <= to_slv(s_cutoff_input);
     s_cutoff_input <= resize(s_scaled_error - s_integrated_output, s_cutoff_input);                        --Loop subtraction

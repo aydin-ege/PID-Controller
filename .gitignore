@@ -12,3 +12,5 @@
 !PID_Controller.srcs/*/*/*/*
 !PID_Controller.srcs/*/*/*/*/
 !PID_Controller.srcs/*/*/*/*/*
+!matlab_sim/
+!matlab_sim/*
