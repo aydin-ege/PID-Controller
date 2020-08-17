@@ -22,8 +22,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-library ieee_proposed;
-use ieee_proposed.fixed_pkg.all;
+library floatfixlib;
+use floatfixlib.fixed_pkg.all;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -32,13 +32,12 @@ use ieee_proposed.fixed_pkg.all;
 
 entity derivative is
     Generic ( g_cutoff : STD_LOGIC_VECTOR (31 downto 0) );
-    Port ( 
+    Port ( i_clk : in STD_LOGIC;
            i_adc_clk : in STD_LOGIC;
            i_error : in STD_LOGIC_VECTOR (31 downto 0);
            i_kd : in STD_LOGIC_VECTOR (31 downto 0);
            o_D_result : out STD_LOGIC_VECTOR (31 downto 0);
-           o_failure : out STD_LOGIC 
-           );
+           o_failure : out STD_LOGIC );
 end derivative;
 
 architecture Behavioral of derivative is

@@ -23,8 +23,9 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 use IEEE.NUMERIC_STD.ALL;
-library ieee_proposed;
-use ieee_proposed.fixed_pkg.all;
+library floatfixlib;
+use floatfixlib.fixed_pkg.all;
+
 
 entity PID_to_output is
     Port ( 

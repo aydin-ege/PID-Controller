@@ -66,18 +66,12 @@ begin
         );
     PID_module : entity work.top_module(Behavioral)
         port map(
-            i_clk => s_clk_200,
             i_adc_clk => s_clk_200, 
             i_feedback => s_feedback,
-            i_feedback_tvalid => '1',
             i_reference => x"000",
-            i_reference_tvalid => '1',
             i_kp => to_slv(s_ki),
-            i_kp_tvalid => '1',
             i_ki => to_slv(s_ki),
-            i_ki_tvalid => '1',
             i_kd => to_slv(s_ki),
-            i_kd_tvalid => '1',
             o_output => s_output
         );
     process(s_clk_100)
