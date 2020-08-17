@@ -191,6 +191,7 @@
     <FileSet Name="multiplier_core" Type="BlockSrcs" RelSrcDir="$PSRCDIR/multiplier_core">
       <File Path="$PSRCDIR/sources_1/ip/multiplier_core/multiplier_core.xci">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
