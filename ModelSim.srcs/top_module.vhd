@@ -25,8 +25,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-library ieee_proposed;
-use ieee_proposed.fixed_pkg.all;
+library floatfixlib;
+use floatfixlib.fixed_pkg.all;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
@@ -70,7 +70,7 @@ begin
             g_max_accumulator => to_sfixed(1000, 13, -18),
             g_min_accumulator => to_sfixed(-1000, 13, -18),
             g_ADC_range => to_sfixed(10, 13, -18),
-            g_clk_frequency => 100000000
+            g_clk_frequency => 10000
         )
         port map(
             i_adc_clk => i_adc_clk,
@@ -81,9 +81,9 @@ begin
     
     Derivative : entity work.derivative (Behavioral)
         generic map (
-            g_cutoff => to_sfixed(1000, 13, -18),
-            g_clk_frequency => 1,
-            g_ADC_range => to_sfixed(1000, 13, -18)    
+            g_cutoff => to_sfixed(3.3394404818866, 13, -18),
+            g_clk_frequency => 10000,
+            g_ADC_range => to_sfixed(10, 13, -18)    
         )
         port map ( 
             i_adc_clk => i_adc_clk,

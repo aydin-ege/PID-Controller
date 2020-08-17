@@ -25,8 +25,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-library ieee_proposed;
-use ieee_proposed.fixed_pkg.all;
+library floatfixlib;
+use floatfixlib.fixed_pkg.all;
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
 --library UNISIM;
@@ -48,15 +48,14 @@ end top_module;
 architecture Behavioral of top_module is 
     signal s_error : STD_LOGIC_VECTOR(31 downto 0) := (others => '0'); 
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
-    signal s_P_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
+    signal s_P_overflow, s_I_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
 
 begin 
-    o_overflow <= s_P_overflow or s_D_overflow or s_PID_overflow;
+    o_overflow <= s_P_overflow or s_I_overflow or s_D_overflow or s_PID_overflow;
     
     s_error <=  to_slv(resize(resize(to_sfixed(i_reference, 11, 0), 13, -18) - resize(to_sfixed(i_feedback, 11, 0), 13, -18), 13, -18));
         
     Proportional : entity work.proportional(Behavioral)
-        Generic map ( g_ADC_range => to_sfixed(10, 13, -18))
         port map(
             i_adc_clk => i_adc_clk,
             i_error => s_error,
@@ -68,22 +67,19 @@ begin
     Integral : entity work.integral(Behavioral)
         generic map ( 
             g_max_accumulator => to_sfixed(1000, 13, -18),
-            g_min_accumulator => to_sfixed(-1000, 13, -18),
-            g_ADC_range => to_sfixed(10, 13, -18),
-            g_clk_frequency => 100000000
+            g_min_accumulator => to_sfixed(-1000, 13, -18)
         )
         port map(
             i_adc_clk => i_adc_clk,
             i_error => s_error,
             i_ki => i_ki,
-            o_I_result => s_I_result
+            o_I_result => s_I_result,
+            o_overflow => s_I_overflow
         ); 
     
     Derivative : entity work.derivative (Behavioral)
         generic map (
-            g_cutoff => to_sfixed(1000, 13, -18),
-            g_clk_frequency => 1,
-            g_ADC_range => to_sfixed(1000, 13, -18)    
+            g_cutoff => to_slv(to_sfixed(1000, 13, -18))     -- will check later
         )
         port map ( 
             i_adc_clk => i_adc_clk,

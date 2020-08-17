@@ -23,8 +23,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 use IEEE.NUMERIC_STD.ALL;
-library ieee_proposed;
-use ieee_proposed.fixed_pkg.all;
+library floatfixlib;
+use floatfixlib.fixed_pkg.all;
 
 entity proportional is
     Generic ( g_ADC_range : sfixed(13 downto -18) );
@@ -33,7 +33,7 @@ entity proportional is
            i_kp : in STD_LOGIC_VECTOR (31 downto 0);
            o_P_result : out STD_LOGIC_VECTOR (31 downto 0);
            o_overflow : out STD_LOGIC);
-    constant c_ADC_step_voltage : sfixed(13 downto -50) := g_ADC_range / 4096;
+    constant c_ADC_step_voltage : sfixed(13 downto -50) := resize(g_ADC_range / 4096, 13, -50);
 end proportional;
 
 architecture Behavioral of proportional is   
