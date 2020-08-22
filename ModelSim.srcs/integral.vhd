@@ -21,57 +21,67 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned value
 use IEEE.NUMERIC_STD.ALL;
 library floatfixlib;
 use floatfixlib.fixed_pkg.all;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity integral is
     Generic ( 
-        g_ADC_range : sfixed(13 downto -18);
+        g_ADC_range : ufixed(7 downto -8);
         g_clk_frequency : integer;
         g_max_accumulator : sfixed (13 downto -18);
         g_min_accumulator : sfixed (13 downto -18)
     );
     Port ( 
+        i_clk : in STD_LOGIC;
         i_adc_clk : in STD_LOGIC;
-        i_error : in STD_LOGIC_VECTOR (31 downto 0);
+        i_reset : in STD_LOGIC;
+        i_error : in STD_LOGIC_VECTOR (12 downto 0);
         i_ki : in STD_LOGIC_VECTOR (31 downto 0);
         o_I_result : out STD_LOGIC_VECTOR (31 downto 0)
     );
-    constant c_ADC_step_voltage : sfixed(13 downto -50) := resize(g_ADC_range / 4096, 13, -50);
-    constant c_clk_period : sfixed(13 downto -50) := resize(1/to_sfixed(g_clk_frequency, 31, 0), 13, -50);
-    constant c_integral_constant : sfixed(13 downto -50) := resize(c_ADC_step_voltage*c_clk_period, 13, -50);
+    constant c_clk_frequency : ufixed(27 downto 0) := resize(to_ufixed(g_clk_frequency, 31, 0), 27, 0);
+    constant c_before_dividing : ufixed(8 downto -35) := g_ADC_range/c_clk_frequency; --/4096
+    constant c_integral_constant_ufixed : ufixed(-16 downto -47) :=  to_ufixed(to_slv(resize(c_before_dividing, -4, -35)), -16, -47);
+    constant c_integral_constant : STD_LOGIC_VECTOR(31 downto 0) := to_slv(c_integral_constant_ufixed);
 end integral;
 
-architecture Behavioral of integral is    
-    signal s_future_ACC : sfixed(14 downto -50) := (others => '0');
-    signal s_ACC, s_error_constant_multiple  : sfixed(13 downto -50) := (others => '0');
-    signal s_scaled_error : sfixed(27 downto -36) := (others => '0');
+architecture RTL of integral is   
+    
+    signal s_mult_0 : STD_LOGIC_VECTOR(44 downto 0) := (others => '0'); --26 downto -18
+    signal s_mult_1 : STD_LOGIC_VECTOR(76 downto 0) := (others => '0'); --10 downto -66
+    
+    signal s_new_data : sfixed(10 downto -66) := (others => '0');
+    signal s_integral_buffer : sfixed(13 downto -66) := (others => '0');
+    signal s_future_integral : sfixed(14 downto -66) := (others => '0');
 begin     
-    s_future_ACC <= s_error_constant_multiple + s_ACC;
+    
+	s_mult_0 <= std_logic_vector(signed(i_error)*signed(i_ki));
+	s_mult_1 <= std_logic_vector(signed(s_mult_0)*signed(c_integral_constant));
+    s_new_data <= to_sfixed(s_mult_1, 10, -66); 
+    
+    process(i_clk)
+    begin
+        if rising_edge(i_clk) then
+            s_future_integral <= s_integral_buffer + s_new_data;
+        end if;
+    end process;
+    
+    
     process(i_adc_clk)
     begin
         if rising_edge(i_adc_clk) then
-            s_scaled_error <= to_sfixed(i_error, 13, -18) * to_sfixed(i_ki, 13, -18); 
-            s_error_constant_multiple <= resize(s_scaled_error * c_integral_constant, s_error_constant_multiple);
-            if s_future_ACC < g_max_accumulator and s_future_ACC > g_min_accumulator then
-                s_ACC <= resize(s_future_ACC, s_ACC);
+            if s_future_integral < g_max_accumulator and s_future_integral > g_min_accumulator then
+                s_integral_buffer <= resize(s_future_integral, s_integral_buffer);
             else
-                if s_future_ACC < g_min_accumulator then
-                    s_ACC <= resize(g_min_accumulator, s_ACC);
+                if s_future_integral < g_min_accumulator then
+                    s_integral_buffer <= resize(g_min_accumulator, s_integral_buffer);
                 else
-                    s_ACC <= resize(g_max_accumulator, s_ACC); 
+                    s_integral_buffer <= resize(g_max_accumulator, s_integral_buffer); 
                 end if;
             end if;
         end if;
     end process;
-    o_I_result <= to_slv(resize(s_ACC, 13, -18));
-end Behavioral;
+    o_I_result <= to_slv(resize(s_integral_buffer, 13, -18));
+end RTL;
