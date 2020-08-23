@@ -89,8 +89,8 @@ begin
             P => s_mult1  -- 34 downto -26
         );
         
-    s_mult_result <= resize(to_sfixed(s_mult1, 22, -38), s_mult_result); -- divided by 4096 (shift 12 times)
-    s_P_result <= resize(s_mult_result, s_P_result);
+    s_mult_result <= resize(to_sfixed(s_mult1, 22, -38), s_mult_result, false, false); -- divided by 4096 (shift 12 times)
+    s_P_result <= resize(s_mult_result, s_P_result, false, false);
     o_overflow <= '0' when s_mult_result = s_P_result else '1'; -- if not equal important bit is cut off 
     o_P_result <= to_slv(s_P_result); 
 

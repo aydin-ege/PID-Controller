@@ -89,11 +89,15 @@ architecture RTL of derivative is
     signal s_mult_2 : STD_LOGIC_VECTOR(56 downto 0) := (others => '0'); --13 downto -43
     signal s_scaled_error : sfixed(26 downto -18):= (others => '0');
     signal s_cutoff_input : sfixed(27 downto -18):= (others => '0');
-    signal s_cutoff_output, s_integral_input : sfixed(13 downto -18):= (others => '0');
+    signal s_cutoff_output, s_integral_input, s_integral_input_1 : sfixed(13 downto -18):= (others => '0');
     signal s_sum_input : sfixed(13 downto -43) := (others => '0');
     signal s_integral_buffer, s_future_integral : sfixed(13 downto -43) := (others => '0');
+    signal s_set_integral_0, s_set_integral_1, s_set_integral_2 , s_set_integral_old : STD_LOGIC := '0';
     signal s_integral_output : sfixed(13 downto -18) := (others => '0');
 begin
+    s_scaled_error <= to_sfixed(s_mult_0, s_scaled_error);
+    s_integral_input <= s_cutoff_output;   
+    s_sum_input <= to_sfixed(s_mult_2, 13, -43);     
    
     mult_kd : mult_gen_2
     PORT MAP (
@@ -103,21 +107,25 @@ begin
         SCLR => i_reset,
         P => s_mult_0
     );
-    s_scaled_error <= to_sfixed(s_mult_0, s_scaled_error);
     
-    process(i_clk, i_adc_clk)
-        variable v_set_buffer : boolean := true;
+    process(i_clk)
     begin
         if rising_edge(i_clk) then    
             s_cutoff_input <= s_scaled_error - s_integral_output;
-            s_future_integral <= resize(s_integral_buffer + s_sum_input, s_future_integral);
-            if v_set_buffer then
+            s_future_integral <= resize(s_integral_buffer + s_sum_input, s_future_integral, false, false);
+            s_set_integral_1 <= s_set_integral_0;
+            s_set_integral_2 <= s_set_integral_1;
+            if s_set_integral_2 /= s_set_integral_old then
+                s_set_integral_old <= s_set_integral_2;
                 s_integral_buffer <= s_future_integral;
-                v_set_buffer := false;
             end if;
         end if;
+    end process;
+    
+    process(i_adc_clk)
+    begin
         if rising_edge(i_adc_clk) then
-            v_set_buffer := true;
+            s_set_integral_0 <= not s_set_integral_0;
         end if;
     end process;
    
@@ -130,9 +138,8 @@ begin
         P => s_mult_1
     );    
     
-    s_cutoff_output <= resize(to_sfixed(s_mult_1, 37, -55), s_cutoff_output);
+    s_cutoff_output <= resize(to_sfixed(s_mult_1, 37, -55), s_cutoff_output, false, false);
     o_D_result <= to_slv(s_cutoff_output);
-    s_integral_input <= s_cutoff_output; -- I tried pipelining this but nothing worked
     
     mult_integral : mult_gen_5
     PORT MAP (
@@ -143,9 +150,7 @@ begin
         P => s_mult_2
     ); 
     
-    s_sum_input <= to_sfixed(s_mult_2, 13, -43);
-    
-    s_integral_output <= resize(s_integral_buffer, s_integral_output);
-    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1, 37, -56) or s_sum_input /= to_sfixed(s_mult_2, 33, -43) else '0';
+    s_integral_output <= resize(s_integral_buffer, s_integral_output, false, false);
+    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1, 37, -55) else '0';
 
 end RTL;

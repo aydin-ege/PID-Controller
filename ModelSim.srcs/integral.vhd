@@ -26,6 +26,7 @@ library floatfixlib;
 use floatfixlib.fixed_pkg.all;
 
 
+
 entity integral is
     Generic ( 
         g_ADC_range : ufixed(7 downto -8);
@@ -52,36 +53,51 @@ architecture RTL of integral is
     signal s_mult_0 : STD_LOGIC_VECTOR(44 downto 0) := (others => '0'); --26 downto -18
     signal s_mult_1 : STD_LOGIC_VECTOR(76 downto 0) := (others => '0'); --10 downto -66
     
-    signal s_new_data : sfixed(10 downto -66) := (others => '0');
-    signal s_integral_buffer : sfixed(13 downto -66) := (others => '0');
-    signal s_future_integral : sfixed(14 downto -66) := (others => '0');
+    signal s_new_data : sfixed(10 downto -50) := (others => '0');
+    signal s_integral_buffer : sfixed(13 downto -50) := (others => '0');
+    signal s_set_integral_0, s_set_integral_1, s_set_integral_2 , s_set_integral_old : STD_LOGIC := '0';
+    signal s_future_integral : sfixed(13 downto -50) := (others => '0');
+    signal s_max_overflow, s_min_overflow : boolean := false;
 begin     
     
 	s_mult_0 <= std_logic_vector(signed(i_error)*signed(i_ki));
 	s_mult_1 <= std_logic_vector(signed(s_mult_0)*signed(c_integral_constant));
-    s_new_data <= to_sfixed(s_mult_1, 10, -66); 
+    s_new_data <= resize(to_sfixed(s_mult_1, 10, -66), s_new_data); 
     
     process(i_clk)
     begin
         if rising_edge(i_clk) then
-            s_future_integral <= s_integral_buffer + s_new_data;
-        end if;
-    end process;
-    
-    
-    process(i_adc_clk)
-    begin
-        if rising_edge(i_adc_clk) then
-            if s_future_integral < g_max_accumulator and s_future_integral > g_min_accumulator then
-                s_integral_buffer <= resize(s_future_integral, s_integral_buffer);
-            else
-                if s_future_integral < g_min_accumulator then
-                    s_integral_buffer <= resize(g_min_accumulator, s_integral_buffer);
+            s_future_integral <= resize(s_integral_buffer + s_new_data, s_future_integral);
+            s_max_overflow <= resize(s_future_integral, 13, -18) > g_max_accumulator;
+            s_min_overflow <= resize(s_future_integral, 13, -18) < g_min_accumulator;
+            
+            s_set_integral_1 <= s_set_integral_0;
+            s_set_integral_2 <= s_set_integral_1;
+            
+            if s_set_integral_2 /= s_set_integral_old then
+                s_set_integral_old <= s_set_integral_2;
+                if not s_max_overflow then
+                    if not s_min_overflow then
+                        s_integral_buffer <= s_future_integral;
+                    else
+                        s_integral_buffer <= resize(g_min_accumulator, s_integral_buffer);
+                    end if;
                 else
                     s_integral_buffer <= resize(g_max_accumulator, s_integral_buffer); 
                 end if;
             end if;
+            
         end if;
     end process;
+    
+
+    process(i_adc_clk)
+    begin
+        if rising_edge(i_adc_clk) then
+            s_set_integral_0 <= not s_set_integral_0;
+        end if;
+    end process;
+    
+    
     o_I_result <= to_slv(resize(s_integral_buffer, 13, -18));
 end RTL;

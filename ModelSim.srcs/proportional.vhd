@@ -26,6 +26,7 @@ library floatfixlib;
 use floatfixlib.fixed_pkg.all;
 
 
+
 entity proportional is
     Generic ( 
         g_ADC_range : ufixed(7 downto -8) 
@@ -43,7 +44,7 @@ end proportional;
 
 
 architecture RTL of proportional is   
-
+    
     signal s_mult_result : sfixed(22 downto -18)  := (others => '0');
     signal s_P_result : sfixed(13 downto -18) := (others => '0');
     signal s_mult0 : STD_LOGIC_VECTOR(28 downto 0) := (others => '0');

@@ -25,6 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 library floatfixlib;
 use floatfixlib.fixed_pkg.all;
 
+
 entity derivative is
 
     Generic ( 
@@ -44,8 +45,8 @@ entity derivative is
     
     constant c_clk_frequency : ufixed(28 downto 0) := resize(to_ufixed(g_clk_frequency, 31, 0), 28, 0);
     constant c_N_times_ADC : ufixed(21 downto -26) := g_cutoff * g_ADC_range; --before dividing by 4096
-    constant c_Nk_ufixed : ufixed(9 downto -38) := to_ufixed(to_slv(c_N_times_ADC), 9, -38);-- N*ADC/4096
-    constant c_Nk : STD_LOGIC_VECTOR(47 downto 0) := to_slv(c_Nk_ufixed); 
+    constant c_Nk_ufixed : ufixed(9 downto -37) := resize(to_ufixed(to_slv(c_N_times_ADC), 9, -38), 9, -37);-- N*ADC/4096
+    constant c_Nk : STD_LOGIC_VECTOR(46 downto 0) := to_slv(c_Nk_ufixed); 
     
     constant c_f_times_ADC : ufixed(36 downto -8) := c_clk_frequency*g_ADC_range;
     constant c_reciprocal_fADC : ufixed(8 downto -37) := to_ufixed(1, 0, 0)/c_f_times_ADC; --1/(f*ADC)
@@ -56,44 +57,53 @@ end derivative;
 architecture RTL of derivative is
     
     signal s_mult_0 : STD_LOGIC_VECTOR(44 downto 0) := (others => '0'); --26 downto -18
-    signal s_mult_1 : STD_LOGIC_VECTOR(93 downto 0) := (others => '0'); --38 downto -56
+    signal s_mult_1 : STD_LOGIC_VECTOR(92 downto 0) := (others => '0'); --38 downto -55
     signal s_mult_2 : STD_LOGIC_VECTOR(56 downto 0) := (others => '0'); --13 downto -43
     signal s_scaled_error : sfixed(26 downto -18):= (others => '0');
     signal s_cutoff_input : sfixed(27 downto -18):= (others => '0');
-    signal s_cutoff_output : sfixed(13 downto -18):= (others => '0');
+    signal s_cutoff_output, s_integral_input, s_integral_input_1 : sfixed(13 downto -18):= (others => '0');
     signal s_sum_input : sfixed(13 downto -43) := (others => '0');
-    signal s_integral_buffer : sfixed(13 downto -43) := (others => '0');
+    signal s_integral_buffer, s_future_integral : sfixed(13 downto -43) := (others => '0');
+    signal s_set_integral_0, s_set_integral_1, s_set_integral_2 , s_set_integral_old : STD_LOGIC := '0';
     signal s_integral_output : sfixed(13 downto -18) := (others => '0');
-    
 begin
-   
-	s_mult_0 <= std_logic_vector(signed(i_error)*signed(i_kd));
     s_scaled_error <= to_sfixed(s_mult_0, s_scaled_error);
+    s_integral_input <= s_cutoff_output;   
+    s_sum_input <= to_sfixed(s_mult_2, 13, -43);     
+   
+    s_mult_0 <= std_logic_vector(signed(i_error)*signed(i_kd));
+
     
     process(i_clk)
     begin
         if rising_edge(i_clk) then    
             s_cutoff_input <= s_scaled_error - s_integral_output;
+            s_future_integral <= resize(s_integral_buffer + s_sum_input, s_future_integral); --try pipelining future integral
+            s_set_integral_1 <= s_set_integral_0;
+            s_set_integral_2 <= s_set_integral_1;
+            if s_set_integral_2 /= s_set_integral_old then
+                s_set_integral_old <= s_set_integral_2;
+                s_integral_buffer <= s_future_integral;
+            end if;
         end if;
     end process;
-   
-    s_mult_1 <= std_logic_vector(signed(to_slv(s_cutoff_input))*signed(c_Nk));   
-    
-    s_cutoff_output <= resize(to_sfixed(s_mult_1, 37, -56), s_cutoff_output);
-    o_D_result <= to_slv(s_cutoff_output);
-    
-    s_mult_2 <= std_logic_vector(signed(to_slv(s_cutoff_output))*signed(c_integral_constant));   
-    
-    s_sum_input <= to_sfixed(s_mult_2, 13, -43);
     
     process(i_adc_clk)
     begin
         if rising_edge(i_adc_clk) then
-            s_integral_buffer <= resize(s_integral_buffer + s_sum_input, s_integral_buffer);
+            s_set_integral_0 <= not s_set_integral_0;
         end if;
     end process;
+   
+    s_mult_1 <= std_logic_vector(signed(to_slv(s_cutoff_input))*signed(c_Nk));   
+   
     
+    s_cutoff_output <= resize(to_sfixed(s_mult_1, 37, -55), s_cutoff_output);
+    o_D_result <= to_slv(s_cutoff_output);
+    
+    s_mult_2 <= std_logic_vector(signed(to_slv(s_cutoff_output))*signed(c_integral_constant)); 
+	
     s_integral_output <= resize(s_integral_buffer, s_integral_output);
-    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1, 37, -56) or s_sum_input /= to_sfixed(s_mult_2, 33, -43) else '0';
+    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1, 37, -55) else '0';
 
 end RTL;

@@ -1,7 +1,7 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Fri Aug 21 19:57:17 2020
+// Date        : Sun Aug 23 15:25:25 2020
 // Host        : Ege-PC running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               D:/my/Vivado/PID_Controller/PID_Controller.srcs/sources_1/ip/mult_gen_3/mult_gen_3_stub.v

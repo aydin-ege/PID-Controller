@@ -57,9 +57,9 @@
 mult_gen_2 your_instance_name (
   .CLK(CLK),    // input wire CLK
   .A(A),        // input wire [12 : 0] A
-  .B(B),        // input wire [30 : 0] B
+  .B(B),        // input wire [31 : 0] B
   .SCLR(SCLR),  // input wire SCLR
-  .P(P)        // output wire [43 : 0] P
+  .P(P)        // output wire [44 : 0] P
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 
