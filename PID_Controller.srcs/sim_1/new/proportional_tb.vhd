@@ -30,15 +30,20 @@ entity proportional_tb is
 end proportional_tb;
 
 architecture Behavioral of proportional_tb is
-    signal clk : STD_LOGIC := '0';
-    signal s_result, kp, error : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+    signal clk, adc_clk : STD_LOGIC := '0';
+    signal s_result, kp : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+    signal error : STD_LOGIC_VECTOR(12 downto 0) := (others => '0');
 begin
     clk <= not clk after 10ns;
-    error <= to_slv(to_sfixed(1, 13, -18)), to_slv(to_sfixed(2, 13, -18)) after 100ns, to_slv(to_sfixed(-3, 13, -18)) after 200ns,  to_slv(to_sfixed(9, 13, -18)) after 700ns;
+    adc_clk <= not adc_clk after 1000ns;
+    error <= to_slv(to_sfixed(1, 12, 0)), to_slv(to_sfixed(1, 12, 0)) after 100ns, to_slv(to_sfixed(1, 12, 0)) after 200ns,  to_slv(to_sfixed(1, 12, 0)) after 700ns;
     kp <= to_slv(to_sfixed(1, 13, -18)), to_slv(to_sfixed(0.333333, 13, -18)) after 140ns, to_slv(to_sfixed(-2, 13, -18)) after 280ns, to_slv(to_sfixed(0.1, 13, -18)) after 400ns;
     
-    Proportional : entity work.proportional(Behavioral)
+    Proportional : entity work.proportional(RTL)
+        Generic map ( g_ADC_range => to_ufixed(10, 7, -8))
         Port map( 
+            i_adc_clk => adc_clk,
+            i_reset => '0',
             i_clk => clk,
             i_error => error,
             i_kp => kp,
