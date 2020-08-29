@@ -28,24 +28,25 @@ use ieee_proposed.fixed_pkg.all;
 
 entity PID_to_output is
     Port ( 
+            i_ADC_clk : in STD_LOGIC;
             i_P_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
             i_I_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
             i_D_result : in STD_LOGIC_VECTOR(31 DOWNTO 0);
-            o_output : out STD_LOGIC_VECTOR(11 DOWNTO 0);
-            o_overflow : out STD_LOGIC --TODO
+            o_output : out STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
 end PID_to_output;
 
-architecture Behavioral of PID_to_output is
+architecture RTL of PID_to_output is
     signal s_P, s_I, s_D : sfixed(13 downto -18);
-    signal s_p_overflow, s_n_overflow : Boolean := False;
 begin
     s_P <= to_sfixed(i_P_result, s_P);
     s_I <= to_sfixed(i_I_result, s_I);
     s_D <= to_sfixed(i_D_result, s_D);
-    s_p_overflow <= s_P + s_I + s_D > 4095;
-    s_n_overflow <= s_P + s_I + s_D < -4096;
-    o_overflow <= '1' when s_p_overflow or s_n_overflow else '0';
-    o_output <= x"FFF" when s_p_overflow else x"000" when s_n_overflow else to_slv(resize(s_P + s_I + s_D, 11, 0));
+    process(i_ADC_clk)
+    begin
+        if rising_edge(i_ADC_clk) then
+            o_output <= to_slv(resize(s_P + s_I + s_D, 13, 18));
+        end if;
+    end process;
     
-end Behavioral;
+end RTL;
