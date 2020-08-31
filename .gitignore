@@ -2,6 +2,7 @@
 !*.vhd
 !*.xpr
 !*/
+!PID_Controller.pkg/*
 !PID_Controller.srcs/
 !PID_Controller.srcs/*
 !PID_Controller.srcs/*/
