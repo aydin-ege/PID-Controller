@@ -14,3 +14,5 @@
 !PID_Controller.srcs/*/*/*/*/*
 !matlab_sim/
 !matlab_sim/*
+!Autotune_simulink/
+!Autotune_simulink/*
