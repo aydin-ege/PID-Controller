@@ -596,11 +596,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>PID_controller_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>UMRAM:user:top_module:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2020-08-31T21:00:29Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2020-08-31T21:04:34Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="UMRAM:user:top_module:1.0_ARCHIVE_LOCATION">d:/my/Vivado/PID_Controller/PID_Controller.pkg</xilinx:tag>
         <xilinx:tag xilinx:name="UMRAM:user:PID_controller:1.0_ARCHIVE_LOCATION">d:/my/Vivado/PID_Controller/PID_Controller.pkg</xilinx:tag>
