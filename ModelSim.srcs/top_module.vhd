@@ -36,7 +36,7 @@ entity top_module is
         i_kp : in STD_LOGIC_VECTOR (31 downto 0);
         i_ki : in STD_LOGIC_VECTOR (31 downto 0);
         i_kd : in STD_LOGIC_VECTOR (31 downto 0);
-        o_output : out STD_LOGIC_VECTOR (11 downto 0);
+        o_output : out STD_LOGIC_VECTOR (31 downto 0);
         o_overflow : out STD_LOGIC
     );
 end top_module;
@@ -44,9 +44,9 @@ end top_module;
 architecture RTL of top_module is 
     signal s_error : STD_LOGIC_VECTOR(12 downto 0) := (others => '0'); 
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
-    signal s_P_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
+    signal s_P_overflow, s_D_overflow : STD_LOGIC := '0';
 begin 
-    o_overflow <= s_P_overflow or s_D_overflow or s_PID_overflow;
+    o_overflow <= s_P_overflow or s_D_overflow;
     
     process(i_clk)
     begin
@@ -64,7 +64,7 @@ begin
             i_error => s_error,
             i_kp => i_kp,
             o_P_result => s_P_result,
-            o_overflow => s_D_overflow
+            o_overflow => s_P_overflow
         );
         
     Integral : entity work.integral(RTL)
@@ -99,13 +99,13 @@ begin
             o_overflow => s_D_overflow
         );
                  
-    PID_sum : entity work.PID_to_output(Behavioral)
+    PID_sum : entity work.PID_to_output(RTL)
         port map (
+            i_adc_clk => i_adc_clk,
             i_P_result => s_P_result,
             i_I_result => s_I_result,
             i_D_result => s_D_result,
-            o_output => o_output,
-            o_overflow => s_PID_overflow
+            o_output => o_output
         );
 
 end RTL;

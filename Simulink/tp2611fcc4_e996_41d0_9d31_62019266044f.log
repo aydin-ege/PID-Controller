@@ -1,0 +1,50 @@
+if { [catch {vsimulink top_module -t 1ns -novopt  } errmsg] } {
+    echo "Loading simulation and HDL Verifier library failed."; 
+    echo $errmsg; 
+    quit -f; 
+}
+# vsim top_module -t 1ns -novopt -foreign "simlinkserver {C:/Program Files/MATLAB/R2016b/toolbox/edalink/extensions/modelsim/windows64/liblfmhdls_gcc450.dll}  ; -batch  ; -socket 55364 " 
+# Start time: 12:52:09 on Aug 29,2020
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# //  ModelSim SE-64 10.5 Feb 13 2016 
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading std.standard
+# Refreshing D:/my/Vivado/PID_Controller/Simulink/work.top_module(rtl)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading floatfixlib.fixed_float_types
+# Loading ieee.math_real(body)
+# Loading floatfixlib.fixed_pkg(body)
+# Loading work.top_module(rtl)
+# Refreshing D:/my/Vivado/PID_Controller/Simulink/work.proportional(rtl)
+# Loading work.proportional(rtl)
+# Refreshing D:/my/Vivado/PID_Controller/Simulink/work.integral(rtl)
+# Loading work.integral(rtl)
+# Refreshing D:/my/Vivado/PID_Controller/Simulink/work.derivative(rtl)
+# Loading work.derivative(rtl)
+# Refreshing D:/my/Vivado/PID_Controller/Simulink/work.pid_to_output(rtl)
+# Loading work.pid_to_output(rtl)
+# Loading C:/Program Files/MATLAB/R2016b/toolbox/edalink/extensions/modelsim/windows64/liblfmhdls_gcc450.dll
+# ************************************************************************
+# HDL server has been started in batch mode. The HDL simulator will be 
+# blocked until Simulink starts cosimulation. If you do not want to run
+# in batch mode, restart the HDL simulator in a different run mode. To 
+# exit the HDL simulator without running a cosimulation session, issue 
+# the breakHdlSim('55364') command in MATLAB.
+
+# 
+# <EOF>
+# End time: 12:52:12 on Aug 29,2020, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 1

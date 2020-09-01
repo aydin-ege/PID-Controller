@@ -27,6 +27,18 @@ use IEEE.NUMERIC_STD.ALL;
 use ieee_proposed.fixed_pkg.all;
 
 entity top_module is
+    Generic(
+        g_max_accumulator_n : integer;
+        g_max_accumulator_d : integer;
+        g_min_accumulator_n : integer;
+        g_min_accumulator_d : integer;
+        g_ADC_range_n : integer;
+        g_ADC_range_d : integer;
+        g_cutoff_n : integer;
+        g_cutoff_d : integer;
+        g_ADC_frequency : integer
+    );
+    
     Port ( 
         i_clk : in STD_LOGIC;
         i_adc_clk : in STD_LOGIC;
@@ -36,17 +48,23 @@ entity top_module is
         i_kp : in STD_LOGIC_VECTOR (31 downto 0);
         i_ki : in STD_LOGIC_VECTOR (31 downto 0);
         i_kd : in STD_LOGIC_VECTOR (31 downto 0);
-        o_output : out STD_LOGIC_VECTOR (11 downto 0);
+        o_output : out STD_LOGIC_VECTOR (31 downto 0);
         o_overflow : out STD_LOGIC
     );
+    
+    constant c_max_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_max_accumulator_n, 31, 0) / to_sfixed(g_max_accumulator_n, 31, 0), 13, -18 );
+    constant c_min_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_min_accumulator_n, 31, 0) / to_sfixed(g_min_accumulator_n, 31, 0), 13, -18 );
+    constant c_ADC_range : ufixed(7 downto -8):= resize(to_ufixed(g_ADC_range_n, 31, 0) / to_ufixed(g_ADC_range_d, 31, 0), 7, -8 );
+    constant c_cutoff : ufixed(13 downto -18) := resize(to_ufixed(g_cutoff_n, 31, 0) / to_ufixed(g_cutoff_d, 31, 0), 13, -18 );
+  
 end top_module;
 
 architecture RTL of top_module is 
     signal s_error : STD_LOGIC_VECTOR(12 downto 0) := (others => '0'); 
     signal s_P_result, s_I_result, s_D_result : STD_LOGIC_VECTOR(31 DOWNTO 0):= (others => '0');
-    signal s_P_overflow, s_D_overflow, s_PID_overflow : STD_LOGIC := '0';
+    signal s_P_overflow, s_D_overflow : STD_LOGIC := '0';
 begin 
-    o_overflow <= s_P_overflow or s_D_overflow or s_PID_overflow;
+    o_overflow <= s_P_overflow or s_D_overflow;
     
     process(i_clk)
     begin
@@ -56,7 +74,7 @@ begin
     end process;
         
     Proportional : entity work.proportional(RTL)
-        Generic map ( g_ADC_range => to_ufixed(10, 7, -8))
+        Generic map ( g_ADC_range => c_ADC_range)
         port map(
             i_clk => i_clk,
             i_adc_clk => i_adc_clk,
@@ -64,15 +82,15 @@ begin
             i_error => s_error,
             i_kp => i_kp,
             o_P_result => s_P_result,
-            o_overflow => s_D_overflow
+            o_overflow => s_P_overflow
         );
         
     Integral : entity work.integral(RTL)
         generic map ( 
-            g_max_accumulator => to_sfixed(1000, 13, -18),
-            g_min_accumulator => to_sfixed(-1000, 13, -18),
-            g_ADC_range => to_ufixed(10, 7, -8),
-            g_clk_frequency => 10000
+            g_max_accumulator => c_max_accumulator,
+            g_min_accumulator => c_min_accumulator,
+            g_ADC_range => c_ADC_range,
+            g_clk_frequency => g_ADC_frequency
         )
         port map(
             i_clk => i_clk,
@@ -85,9 +103,9 @@ begin
     
     Derivative : entity work.derivative (RTL)
         generic map (
-            g_cutoff => to_ufixed(3, 13, -18),
-            g_clk_frequency => 10000,
-            g_ADC_range => to_ufixed(10, 7, -8)    
+            g_cutoff => c_cutoff,
+            g_clk_frequency => g_ADC_frequency,
+            g_ADC_range => c_ADC_range 
         )
         port map ( 
             i_clk => i_clk,
@@ -99,13 +117,13 @@ begin
             o_overflow => s_D_overflow
         );
                  
-    PID_sum : entity work.PID_to_output(Behavioral)
+    PID_sum : entity work.PID_to_output(RTL)
         port map (
+            i_adc_clk => i_adc_clk,
             i_P_result => s_P_result,
             i_I_result => s_I_result,
             i_D_result => s_D_result,
-            o_output => o_output,
-            o_overflow => s_PID_overflow
+            o_output => o_output
         );
 
 end RTL;
