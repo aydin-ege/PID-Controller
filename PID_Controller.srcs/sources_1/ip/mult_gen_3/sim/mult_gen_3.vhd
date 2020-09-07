@@ -56,19 +56,19 @@ USE ieee.numeric_std.ALL;
 LIBRARY mult_gen_v12_0_12;
 USE mult_gen_v12_0_12.mult_gen_v12_0_12;
 
-ENTITY mult_gen_0 IS
+ENTITY mult_gen_3 IS
   PORT (
     CLK : IN STD_LOGIC;
-    A : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-    B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    A : IN STD_LOGIC_VECTOR(44 DOWNTO 0);
+    B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     SCLR : IN STD_LOGIC;
-    P : OUT STD_LOGIC_VECTOR(28 DOWNTO 0)
+    P : OUT STD_LOGIC_VECTOR(76 DOWNTO 0)
   );
-END mult_gen_0;
+END mult_gen_3;
 
-ARCHITECTURE mult_gen_0_arch OF mult_gen_0 IS
+ARCHITECTURE mult_gen_3_arch OF mult_gen_3 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF mult_gen_0_arch: ARCHITECTURE IS "yes";
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF mult_gen_3_arch: ARCHITECTURE IS "yes";
   COMPONENT mult_gen_v12_0_12 IS
     GENERIC (
       C_VERBOSITY : INTEGER;
@@ -94,11 +94,11 @@ ARCHITECTURE mult_gen_0_arch OF mult_gen_0 IS
     );
     PORT (
       CLK : IN STD_LOGIC;
-      A : IN STD_LOGIC_VECTOR(12 DOWNTO 0);
-      B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      A : IN STD_LOGIC_VECTOR(44 DOWNTO 0);
+      B : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       CE : IN STD_LOGIC;
       SCLR : IN STD_LOGIC;
-      P : OUT STD_LOGIC_VECTOR(28 DOWNTO 0)
+      P : OUT STD_LOGIC_VECTOR(76 DOWNTO 0)
     );
   END COMPONENT mult_gen_v12_0_12;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -116,12 +116,12 @@ BEGIN
       C_XDEVICEFAMILY => "virtex7",
       C_HAS_CE => 0,
       C_HAS_SCLR => 1,
-      C_LATENCY => 3,
-      C_A_WIDTH => 13,
+      C_LATENCY => 9,
+      C_A_WIDTH => 45,
       C_A_TYPE => 0,
-      C_B_WIDTH => 16,
+      C_B_WIDTH => 32,
       C_B_TYPE => 1,
-      C_OUT_HIGH => 28,
+      C_OUT_HIGH => 76,
       C_OUT_LOW => 0,
       C_MULT_TYPE => 1,
       C_CE_OVERRIDES_SCLR => 0,
@@ -139,4 +139,4 @@ BEGIN
       SCLR => SCLR,
       P => P
     );
-END mult_gen_0_arch;
+END mult_gen_3_arch;

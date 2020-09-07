@@ -1,3 +1,7 @@
+-- Testbench automatically generated online
+-- at https://vhdl.lapinoo.net
+-- Generation date : 6.9.2020 15:28:26 UTC
+
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -33,13 +37,12 @@ architecture tb of tb_top_module is
     constant TbPeriod : time := 1000 ns; -- EDIT Put right period here
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
-    signal adc_clk : STD_LOGIC := '0';
 
 begin
 
     dut : top_module
     port map (i_clk       => i_clk,
-              i_adc_clk   => adc_clk,
+              i_adc_clk   => i_adc_clk,
               i_reset     => i_reset,
               i_feedback  => i_feedback,
               i_reference => i_reference,
@@ -54,16 +57,23 @@ begin
 
     -- EDIT: Check that i_clk is really your main clock signal
     i_clk <= TbClock;
-    adc_clk <= not adc_clk after 1000ns;
-    
 
     stimuli : process
     begin
         -- EDIT Adapt initialization as needed
-        i_reset <= '0';
-        i_kp <=  "00000001111111101011110010010101";
-        i_ki <=  "00000010000100101001001101111111";
+        i_adc_clk <= '0';
+        i_feedback <= (others => '0');
+        i_reference <= (others => '0');
+        i_kp <= (others => '0');
+        i_ki <= (others => '0');
         i_kd <= (others => '0');
+
+        -- Reset generation
+        -- EDIT: Check that i_reset is really your reset signal
+        i_reset <= '1';
+        wait for 100 ns;
+        i_reset <= '0';
+        wait for 100 ns;
 
         -- EDIT Add stimuli here
         wait for 100 * TbPeriod;
@@ -72,16 +82,6 @@ begin
         TbSimEnded <= '1';
         wait;
     end process;
-    
-        Plant : entity work.untitled(RTL)
-            port map( 
-            clk   => i_clk,                            
-            reset => i_reset,                            
-            clk_enable => '1',                       
-            In1 => o_output,                             
-            ce_out => gnd,                           
-            Out1 => i_feedback                             
-        ); 
 
 end tb;
 
