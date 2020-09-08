@@ -45,7 +45,7 @@ begin
     process(i_ADC_clk)
     begin
         if rising_edge(i_ADC_clk) then
-            o_output <= to_slv(resize(s_P + s_I + s_D, 13, 18));
+            o_output <= to_slv(resize(s_P + s_I + s_D, 13, -18));
         end if;
     end process;
     
