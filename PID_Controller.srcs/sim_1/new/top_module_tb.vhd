@@ -39,12 +39,12 @@ entity PID_tb is
 end PID_tb;
 
 architecture Behavioral of PID_tb is
-    signal clk, adc_clk, o_overflow : STD_LOGIC := '0';
+    signal clk, adc_clk : STD_LOGIC := '0';
     signal plant_in : STD_LOGIC_VECTOR(31 downto 0):= (others => '0');
     signal plant_out : STD_LOGIC_VECTOR(11 downto 0):= (others => '0');
     signal x : unsigned(11 downto 0) := (others => '0');
 begin
-    adc_clk <= not adc_clk after 5us;        
+    adc_clk <= not adc_clk after 50us;        
     clk <= not clk after 5ns;        
     process(adc_clk)
     begin
@@ -69,7 +69,7 @@ begin
             g_min_accumulator_d => 1,
             g_ADC_range_n => 4096,
             g_ADC_range_d => 10000,
-            g_cutoff_n => 100,
+            g_cutoff_n => 500,
             g_cutoff_d => 1,
             g_ADC_frequency => 10000
         )
@@ -78,12 +78,11 @@ begin
           i_adc_clk => adc_clk,
           i_reset => '0',
           i_feedback => plant_out,
-          i_reference => to_slv(to_sfixed(1, 11, 0)),
+          i_reference => to_slv(to_sfixed(0, 11, 0)),
           i_kp => to_slv(to_sfixed(1, 13, -18)),
           i_ki => to_slv(to_sfixed(1, 13, -18)),
           i_kd => to_slv(to_sfixed(1, 13, -18)),
-          o_output => plant_in,
-          o_overflow => o_overflow
+          o_output => plant_in
     );
 
 
