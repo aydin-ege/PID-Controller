@@ -112,7 +112,7 @@ BEGIN
     GENERIC MAP (
       C_VERBOSITY => 0,
       C_MODEL_TYPE => 0,
-      C_OPTIMIZE_GOAL => 0,
+      C_OPTIMIZE_GOAL => 1,
       C_XDEVICEFAMILY => "virtex7",
       C_HAS_CE => 0,
       C_HAS_SCLR => 1,

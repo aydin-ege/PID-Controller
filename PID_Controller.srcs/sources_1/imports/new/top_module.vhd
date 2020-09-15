@@ -52,8 +52,8 @@ entity top_module is
         o_overflow : out STD_LOGIC
     );
     
-    constant c_max_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_max_accumulator_n, 31, 0) / to_sfixed(g_max_accumulator_n, 31, 0), 13, -18 );
-    constant c_min_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_min_accumulator_n, 31, 0) / to_sfixed(g_min_accumulator_n, 31, 0), 13, -18 );
+    constant c_max_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_max_accumulator_n, 31, 0) / to_sfixed(g_max_accumulator_d, 31, 0), 13, -18 );
+    constant c_min_accumulator : sfixed(13 downto -18):= resize(to_sfixed(g_min_accumulator_n, 31, 0) / to_sfixed(g_min_accumulator_d, 31, 0), 13, -18 );
     constant c_ADC_range : ufixed(7 downto -8):= resize(to_ufixed(g_ADC_range_n, 31, 0) / to_ufixed(g_ADC_range_d, 31, 0), 7, -8 );
     constant c_cutoff : ufixed(13 downto -18) := resize(to_ufixed(g_cutoff_n, 31, 0) / to_ufixed(g_cutoff_d, 31, 0), 13, -18 );
   

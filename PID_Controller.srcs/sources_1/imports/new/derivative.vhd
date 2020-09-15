@@ -151,6 +151,6 @@ begin
     ); 
     
     s_integral_output <= resize(s_integral_buffer, s_integral_output, false, false);
-    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1, 37, -55) else '0';
+    o_overflow <= '1' when s_cutoff_output /= to_sfixed(s_mult_1(92 downto 37), 37, -18) else '0';
 
 end RTL;
