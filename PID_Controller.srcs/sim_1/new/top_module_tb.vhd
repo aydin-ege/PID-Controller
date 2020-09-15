@@ -67,9 +67,9 @@ begin
             g_max_accumulator_d => 1,
             g_min_accumulator_n => -1000,
             g_min_accumulator_d => 1,
-            g_ADC_range_n => 10,
-            g_ADC_range_d => 1,
-            g_cutoff_n => 3,
+            g_ADC_range_n => 4096,
+            g_ADC_range_d => 10000,
+            g_cutoff_n => 100,
             g_cutoff_d => 1,
             g_ADC_frequency => 10000
         )
@@ -79,8 +79,8 @@ begin
           i_reset => '0',
           i_feedback => plant_out,
           i_reference => to_slv(to_sfixed(1, 11, 0)),
-          i_kp => to_slv(to_sfixed(1.2, 13, -18)),
-          i_ki => to_slv(to_sfixed(22, 13, -18)),
+          i_kp => to_slv(to_sfixed(1, 13, -18)),
+          i_ki => to_slv(to_sfixed(1, 13, -18)),
           i_kd => to_slv(to_sfixed(1, 13, -18)),
           o_output => plant_in,
           o_overflow => o_overflow
