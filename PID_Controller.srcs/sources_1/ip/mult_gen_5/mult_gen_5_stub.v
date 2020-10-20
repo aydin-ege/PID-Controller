@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Fri Aug 21 19:57:10 2020
-// Host        : Ege-PC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub -rename_top mult_gen_5 -prefix
-//               mult_gen_5_ mult_gen_5_stub.v
+// Date        : Tue Oct 20 23:46:51 2020
+// Host        : Erdem running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode synth_stub
+//               C:/Users/90534/Desktop/sssss/PID_Controller.srcs/sources_1/ip/mult_gen_5/mult_gen_5_stub.v
 // Design      : mult_gen_5
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7vx485tffg1761-2
