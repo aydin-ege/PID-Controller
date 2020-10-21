@@ -111,7 +111,7 @@ BEGIN
       g_ADC_range_d => 1,
       g_cutoff_n => 10,
       g_cutoff_d => 1,
-      g_ADC_frequency => 1000000
+      g_ADC_frequency => 961540
     )
     PORT MAP (
       i_clk => i_clk,
