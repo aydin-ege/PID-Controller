@@ -119,8 +119,12 @@ pwm_i: pwm port map (
                                 pwm_left_cntvaluein => pwm_left_cntvaluein
 
 );  
-
-
+IDELAYCTRL_inst : IDELAYCTRL
+port map (
+   RDY => open,       -- 1-bit output: Ready output
+   REFCLK => clk_200M, -- 1-bit input: Reference clock input
+   RST => '0'        -- 1-bit input: Active high reset input
+);
 
 ODELAYE2_inst_right_1: ODELAYE2
      generic map (
@@ -176,6 +180,8 @@ ODELAYE2_inst_left_1: ODELAYE2
              ODATAIN                  => pwm_L_i,         -- 1-bit input: Output delay data input
              REGRST                   => '0'                   -- 1-bit input: Active-high reset tap-delay input
           ); 
+--pwm_L <= pwm_L_i; It generates bitstream when i just do this while commenting the delays above
+--pwm_R <= pwm_R_i;
              
 
 
