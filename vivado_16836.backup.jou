@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Mon Jan 18 13:50:51 2021
+# Process ID: 16836
+# Current directory: C:/Users/ahmet/Desktop/test_code
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11956 C:\Users\ahmet\Desktop\test_code\test_code.xpr
+# Log file: C:/Users/ahmet/Desktop/test_code/vivado.log
+# Journal file: C:/Users/ahmet/Desktop/test_code\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/ahmet/Desktop/test_code/test_code.xpr
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+reset_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1

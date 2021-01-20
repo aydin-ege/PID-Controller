@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Mon Jan 18 16:21:49 2021
+# Process ID: 18288
+# Current directory: C:/Users/ahmet/Desktop/test_code/test_code.runs/synth_1
+# Command line: vivado.exe -log top_top_module.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_top_module.tcl
+# Log file: C:/Users/ahmet/Desktop/test_code/test_code.runs/synth_1/top_top_module.vds
+# Journal file: C:/Users/ahmet/Desktop/test_code/test_code.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source top_top_module.tcl -notrace

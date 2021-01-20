@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_module_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="top_module_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="653556250000fs"></ZoomStartTime>
+      <ZoomEndTime time="667716250001fs"></ZoomEndTime>
+      <Cursor1Time time="665356250000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="195"></NameColumnWidth>
+      <ValueColumnWidth column_width="112"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="8" />
+   <wvobject fp_name="/top_module_tb/topmodule_i/PWM_L" type="logic">
+      <obj_property name="ElementShortName">PWM_L</obj_property>
+      <obj_property name="ObjectShortName">PWM_L</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/PWM_R" type="logic">
+      <obj_property name="ElementShortName">PWM_R</obj_property>
+      <obj_property name="ObjectShortName">PWM_R</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/s_reference" type="array">
+      <obj_property name="ElementShortName">s_reference[11:0]</obj_property>
+      <obj_property name="ObjectShortName">s_reference[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/s_pid_output" type="array">
+      <obj_property name="ElementShortName">s_pid_output[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_pid_output[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/pid_module/i_kp" type="array">
+      <obj_property name="ElementShortName">i_kp[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_kp[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/pid_module/i_ki" type="array">
+      <obj_property name="ElementShortName">i_ki[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_ki[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/pid_module/i_kd" type="array">
+      <obj_property name="ElementShortName">i_kd[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_kd[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_module_tb/topmodule_i/s_ADC_out" type="array">
+      <obj_property name="ElementShortName">s_ADC_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_ADC_out[15:0]</obj_property>
+   </wvobject>
+</wave_config>

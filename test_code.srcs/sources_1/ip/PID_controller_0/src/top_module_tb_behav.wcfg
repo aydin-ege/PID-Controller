@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="PID_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="PID_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="752020000000fs"></ZoomStartTime>
+      <ZoomEndTime time="866020000001fs"></ZoomEndTime>
+      <Cursor1Time time="847020000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="195"></NameColumnWidth>
+      <ValueColumnWidth column_width="122"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/PID_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/adc_clk" type="logic">
+      <obj_property name="ElementShortName">adc_clk</obj_property>
+      <obj_property name="ObjectShortName">adc_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/o_overflow" type="logic">
+      <obj_property name="ElementShortName">o_overflow</obj_property>
+      <obj_property name="ObjectShortName">o_overflow</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/plant_in" type="array">
+      <obj_property name="ElementShortName">plant_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">plant_in[31:0]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">18</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/plant_out" type="array">
+      <obj_property name="ElementShortName">plant_out[11:0]</obj_property>
+      <obj_property name="ObjectShortName">plant_out[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_error" type="array">
+      <obj_property name="ElementShortName">s_error[12:0]</obj_property>
+      <obj_property name="ObjectShortName">s_error[12:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_P_result" type="array">
+      <obj_property name="ElementShortName">s_P_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_P_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_I_result" type="array">
+      <obj_property name="ElementShortName">s_I_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_I_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_D_result" type="array">
+      <obj_property name="ElementShortName">s_D_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_D_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_P_overflow" type="logic">
+      <obj_property name="ElementShortName">s_P_overflow</obj_property>
+      <obj_property name="ObjectShortName">s_P_overflow</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/s_D_overflow" type="logic">
+      <obj_property name="ElementShortName">s_D_overflow</obj_property>
+      <obj_property name="ObjectShortName">s_D_overflow</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/c_max_accumulator" type="array">
+      <obj_property name="ElementShortName">c_max_accumulator[13:-18]</obj_property>
+      <obj_property name="ObjectShortName">c_max_accumulator[13:-18]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">18</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/c_min_accumulator" type="array">
+      <obj_property name="ElementShortName">c_min_accumulator[13:-18]</obj_property>
+      <obj_property name="ObjectShortName">c_min_accumulator[13:-18]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">18</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/c_ADC_range" type="array">
+      <obj_property name="ElementShortName">c_ADC_range[7:-8]</obj_property>
+      <obj_property name="ObjectShortName">c_ADC_range[7:-8]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">8</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PID_tb/PID/c_cutoff" type="array">
+      <obj_property name="ElementShortName">c_cutoff[13:-18]</obj_property>
+      <obj_property name="ObjectShortName">c_cutoff[13:-18]</obj_property>
+      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+      <obj_property name="radix_fractionWidth">18</obj_property>
+      <obj_property name="radix_otherWidth">0</obj_property>
+   </wvobject>
+</wave_config>

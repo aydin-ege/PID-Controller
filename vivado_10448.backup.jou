@@ -1,0 +1,203 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Mon Jan 18 14:39:34 2021
+# Process ID: 10448
+# Current directory: C:/Users/ahmet/Desktop/test_code
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent6136 C:\Users\ahmet\Desktop\test_code\test_code.xpr
+# Log file: C:/Users/ahmet/Desktop/test_code/vivado.log
+# Journal file: C:/Users/ahmet/Desktop/test_code\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/ahmet/Desktop/test_code/test_code.xpr
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+open_hw
+connect_hw_server
+open_hw_target
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+current_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property -dict [list CONFIG.C_PROBE_OUT4_WIDTH {15} CONFIG.C_NUM_PROBE_OUT {5}] [get_ips vio_0]
+generate_target all [get_files  C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci]
+catch { config_ip_cache -export [get_ips -all vio_0] }
+export_ip_user_files -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci]
+launch_runs -jobs 12 vio_0_synth_1
+export_simulation -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci] -directory C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files -ipstatic_source_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/modelsim} {questa=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/questa} {riviera=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/riviera} {activehdl=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.C_PROBE_OUT4_INIT_VAL {0x200}] [get_ips vio_0]
+generate_target all [get_files  C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci]
+catch { config_ip_cache -export [get_ips -all vio_0] }
+export_ip_user_files -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci] -no_script -sync -force -quiet
+reset_run vio_0_synth_1
+launch_runs -jobs 12 vio_0_synth_1
+export_simulation -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/vio_0/vio_0.xci] -directory C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files -ipstatic_source_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/modelsim} {questa=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/questa} {riviera=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/riviera} {activehdl=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0200 [get_hw_probes v_in_ref -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {v_in_ref} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property INPUT_VALUE_RADIX UNSIGNED [get_hw_probes s_pid_output2_reg_n_0_ -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property NAME.SELECT short [get_hw_probes probe_in1 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]] 
+set_property NAME.SELECT long [get_hw_probes probe_in1 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]] 
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00140000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00340000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 000A0000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 000A0000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 005A0000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE_RADIX UNSIGNED [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE_RADIX HEX [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property -dict [list CONFIG.g_max_accumulator_n {7} CONFIG.g_max_accumulator_d {10} CONFIG.g_min_accumulator_n {-7} CONFIG.g_min_accumulator_d {10} CONFIG.g_cutoff_n {20}] [get_ips PID_controller_0]
+generate_target all [get_files  C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/PID_controller_0/PID_controller_0.xci]
+catch { config_ip_cache -export [get_ips -all PID_controller_0] }
+export_ip_user_files -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/PID_controller_0/PID_controller_0.xci] -no_script -sync -force -quiet
+reset_run PID_controller_0_synth_1
+launch_runs -jobs 12 PID_controller_0_synth_1
+export_simulation -of_objects [get_files C:/Users/ahmet/Desktop/test_code/test_code.srcs/sources_1/ip/PID_controller_0/PID_controller_0.xci] -directory C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files -ipstatic_source_dir C:/Users/ahmet/Desktop/test_code/test_code.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/modelsim} {questa=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/questa} {riviera=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/riviera} {activehdl=C:/Users/ahmet/Desktop/test_code/test_code.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property PROGRAM.FILE {C:/Users/ahmet/Desktop/test_code/test_code.runs/impl_1/top_top_module.bit} [lindex [get_hw_devices xc7vx485t_0] 0]
+program_hw_devices [lindex [get_hw_devices xc7vx485t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7vx485t_0] 0]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0200 [get_hw_probes v_in_ref -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {v_in_ref} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_ki2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_ki2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0200 [get_hw_probes v_in_ref -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {v_in_ref} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 200 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00000000 [get_hw_probes s_kd2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kd2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00040000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 400 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 600 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 1000 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 1500 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 2000 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 2045 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE_RADIX UNSIGNED [get_hw_probes v_in_ref -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 00050000 [get_hw_probes s_kp2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_kp2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+set_property OUTPUT_VALUE 0 [get_hw_probes s_reference2 -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
+commit_hw_vio [get_hw_probes {s_reference2} -of_objects [get_hw_vios -of_objects [get_hw_devices xc7vx485t_0] -filter {CELL_NAME=~"PC_FPGA_bridge"}]]
